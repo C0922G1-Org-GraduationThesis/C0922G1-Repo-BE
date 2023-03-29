@@ -1,7 +1,11 @@
 package com.example.be.service.teacher;
 
+import com.example.be.dto.IEmailAndPhoneNumberDTO;
+import com.example.be.dto.TeacherDTO;
 import com.example.be.dto.TeacherFindById;
 import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 
 public interface ITeacherService {
@@ -21,4 +25,6 @@ public interface ITeacherService {
                        String email,
                        String img,
                        Long teacherId);
+
+    List<IEmailAndPhoneNumberDTO> getAllPhoneNumberAndEmail();
 }

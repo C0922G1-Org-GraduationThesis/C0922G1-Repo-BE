@@ -1,5 +1,7 @@
 package com.example.be.repository;
 
+import com.example.be.dto.IEmailAndPhoneNumberDTO;
+import com.example.be.dto.TeacherDTO;
 import com.example.be.dto.TeacherFindById;
 import com.example.be.model.Teacher;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,6 +10,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Repository
 public interface ITeacherRepository extends JpaRepository<Teacher, Long> {
@@ -60,5 +64,10 @@ public interface ITeacherRepository extends JpaRepository<Teacher, Long> {
                        @Param("email") String email,
                        @Param("img") String img,
                        @Param("teacherId") Long teacherId);
+
+    @Query(value = "select teacher_id as teacherId, email, phone_number as phoneNumber from teacher",
+    countQuery = "select teacher_id as teacherId, email, phone_number as phoneNumber from teacher",
+    nativeQuery = true)
+    List<IEmailAndPhoneNumberDTO> getAllPhoneNumberAndEmail();
 
 }

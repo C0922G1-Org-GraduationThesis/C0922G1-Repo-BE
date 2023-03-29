@@ -1,9 +1,13 @@
 package com.example.be.service.teacher;
 
+import com.example.be.dto.IEmailAndPhoneNumberDTO;
+import com.example.be.dto.TeacherDTO;
 import com.example.be.dto.TeacherFindById;
 import com.example.be.repository.ITeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -28,5 +32,10 @@ public class TeacherServiceImpl implements ITeacherService {
     @Override
     public void updateTeacher(String teacherName, String dateOfBirth, int degreeId, String teacherAddress, boolean teacherGender, String phoneNumber, int facultyId, String email, String img, Long teacherId) {
         iTeacherRepository.updateTeacher(teacherName,dateOfBirth,degreeId,teacherAddress,teacherGender,phoneNumber,facultyId,email,img,teacherId);
+    }
+
+    @Override
+    public List<IEmailAndPhoneNumberDTO> getAllPhoneNumberAndEmail() {
+        return iTeacherRepository.getAllPhoneNumberAndEmail();
     }
 }

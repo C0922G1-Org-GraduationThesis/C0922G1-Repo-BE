@@ -1,9 +1,6 @@
 package com.example.be.controller.restController;
 
-import com.example.be.dto.IDegreeDTO;
-import com.example.be.dto.IFacultyDTO;
-import com.example.be.dto.TeacherDTO;
-import com.example.be.dto.TeacherFindById;
+import com.example.be.dto.*;
 import com.example.be.model.Degree;
 import com.example.be.model.Faculty;
 import com.example.be.model.Teacher;
@@ -32,39 +29,80 @@ public class TeacherRestController {
     @Autowired
     private IFacultyService iFacultyService;
 
+    /**
+     * Create by: TanNN
+     * Date created: 29/03/2023
+     * Function: getAllDegree
+     *
+     * @return HttpStatus.OK When getting the list in the Database, HttpStatus.BAD_REQUEST when an error occurs
+     */
     @GetMapping("degreeAll")
     public ResponseEntity getAllDegree() {
         List<IDegreeDTO> listDegree = iDegreeService.getAllDegree();
         if (listDegree == null) {
-            return new ResponseEntity(listDegree, HttpStatus.NO_CONTENT);
+            return new ResponseEntity(listDegree, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity(listDegree, HttpStatus.OK);
 
     }
 
+    /**
+     * Create by: TanNN
+     * Date created: 29/03/2023
+     * Function: getAllFaculty
+     *
+     * @return HttpStatus.OK When getting the list in the Database, HttpStatus.BAD_REQUEST when an error occurs
+     */
     @GetMapping("facultyAll")
     public ResponseEntity getAllFaculty() {
         List<IFacultyDTO> listDegree = iFacultyService.getAllFaculty();
         if (listDegree == null) {
-            return new ResponseEntity(listDegree, HttpStatus.NO_CONTENT);
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity(listDegree, HttpStatus.OK);
 
     }
 
-    @PostMapping("/createTeacher")
-    public ResponseEntity createTeacher(@Validated @RequestBody TeacherDTO teacher,
-                                        BindingResult bindingResult) {
-        if (bindingResult.hasErrors()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @GetMapping("allPhoneNumberAndEmail")
+    public ResponseEntity getAllPhoneNumberAndEmail() {
+        List<IEmailAndPhoneNumberDTO> teacherDTOS = iTeacherService.getAllPhoneNumberAndEmail();
+        if (teacherDTOS == null) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
+        return new ResponseEntity(teacherDTOS, HttpStatus.OK);
 
+    }
+
+    /**
+     * Create by: TanNN
+     * Date created: 29/03/2023
+     * Function: createTeacher
+     *
+     * @param teacherDTO
+     * @return HttpStatus.OK when the data is saved to the database, HttpStatus.BAD_REQUEST when an error occurs
+     */
+    @PostMapping("/createTeacher")
+    public ResponseEntity createTeacher(@Validated @RequestBody TeacherDTO teacherDTO, BindingResult bindingResult) {
+        teacherDTO.checkValidateCreateTeacher(iTeacherService.getAllPhoneNumberAndEmail(),
+                teacherDTO,bindingResult);
+        if(bindingResult.hasErrors()){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        }
         String teacherCode = "GV-" + (iTeacherService.maxIdTeacher().getTeacherId() + 1);
-        iTeacherService.addTeacher(teacher.getTeacherName(), teacher.getDateOfBirth(), teacher.getDegree().getDegreeId(), teacher.getTeacherAddress(), teacher.isTeacherGender(), teacher.getPhoneNumber(), teacher.getFaculty().getFacultyId(), teacher.getEmail(), teacherCode, teacher.getImg());
+        iTeacherService.addTeacher(teacherDTO.getTeacherName(), teacherDTO.getDateOfBirth(), teacherDTO.getDegree().getDegreeId(), teacherDTO.getTeacherAddress(), teacherDTO.isTeacherGender(), teacherDTO.getPhoneNumber(), teacherDTO.getFaculty().getFacultyId(), teacherDTO.getEmail(), teacherCode, teacherDTO.getImg());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
+    /**
+     * Create by: TanNN
+     * Date created: 29/03/2023
+     * Function: getTeacher
+     *
+     * @param id
+     * @return HttpStatus.OK when retrieving data in the database, HttpStatus.NO_CONTENT when an error occurs
+     */
     @GetMapping("detailTeacher/{id}")
     public ResponseEntity getTeacher(@PathVariable("id") Long id) {
         Teacher teacher = new Teacher();
@@ -85,15 +123,24 @@ public class TeacherRestController {
         teacher.setEmail(teacherFindById.getEmail());
 
         if (teacher == null) {
-            return new ResponseEntity(teacher, HttpStatus.NO_CONTENT);
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity(teacher, HttpStatus.OK);
     }
 
+    /**
+     * Create by: TanNN
+     * Date created: 29/03/2023
+     * Function: updateTeacher
+     *
+     * @param id
+     * @return HttpStatus.OK when the data is saved to the database, HttpStatus.BAD_REQUEST when an error occurs
+     */
     @PatchMapping("/updateTeacher/{id}")
-    public ResponseEntity updateTeacher(@PathVariable("id") Long id,@Validated @RequestBody TeacherDTO teacherDTO,BindingResult bindingResult) {
+    public ResponseEntity updateTeacher(@PathVariable("id") Long id, @Validated @RequestBody TeacherDTO teacherDTO, BindingResult bindingResult) {
+        teacherDTO.checkValidateUpdateTeacher(iTeacherService.getAllPhoneNumberAndEmail(), teacherDTO, bindingResult);
         if (bindingResult.hasErrors()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
         iTeacherService.updateTeacher(teacherDTO.getTeacherName(), teacherDTO.getDateOfBirth(), teacherDTO.getDegree().getDegreeId(), teacherDTO.getTeacherAddress(), teacherDTO.isTeacherGender(), teacherDTO.getPhoneNumber(), teacherDTO.getFaculty().getFacultyId(), teacherDTO.getEmail(), teacherDTO.getImg(), id);
         return new ResponseEntity(HttpStatus.OK);
