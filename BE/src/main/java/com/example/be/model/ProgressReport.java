@@ -8,22 +8,39 @@ public class ProgressReport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "progress_report_id")
     private Long progressReportId;
-    @Column(columnDefinition = "varchar(50)", nullable = false)
-    private String progressReportName;
     @Column(columnDefinition = "text", nullable = false)
     private String progressReportContent;
     @Column(columnDefinition = "text", nullable = false)
     private String progressReportFile;
-    @Column(columnDefinition = "int", nullable = false)
-    private int progressReportPercent;
+    @Column(columnDefinition = "date", nullable = false)
+    private String progressReportDate;
     @ManyToOne
-    @JoinColumn(name = "stage_id" , referencedColumnName = "stage_id")
+    @JoinColumn(name = "stage_id", referencedColumnName = "stage_id")
     private Stage stage;
-    @JoinColumn(name = "project_id" , referencedColumnName = "project_id")
+    @JoinColumn(name = "project_id", referencedColumnName = "project_id")
     @ManyToOne
     private Project project;
 
     public ProgressReport() {
+    }
+
+    public ProgressReport(Long progressReportId, String progressReportContent,
+                          String progressReportFile, String progressReportDate, Stage stage,
+                          Project project) {
+        this.progressReportId = progressReportId;
+        this.progressReportContent = progressReportContent;
+        this.progressReportFile = progressReportFile;
+        this.progressReportDate = progressReportDate;
+        this.stage = stage;
+        this.project = project;
+    }
+
+    public String getProgressReportDate() {
+        return progressReportDate;
+    }
+
+    public void setProgressReportDate(String progressReportDate) {
+        this.progressReportDate = progressReportDate;
     }
 
     public Long getProgressReportId() {
@@ -32,14 +49,6 @@ public class ProgressReport {
 
     public void setProgressReportId(Long progressReportId) {
         this.progressReportId = progressReportId;
-    }
-
-    public String getProgressReportName() {
-        return progressReportName;
-    }
-
-    public void setProgressReportName(String progressReportName) {
-        this.progressReportName = progressReportName;
     }
 
     public String getProgressReportContent() {
@@ -58,13 +67,6 @@ public class ProgressReport {
         this.progressReportFile = progressReportFile;
     }
 
-    public int getProgressReportPercent() {
-        return progressReportPercent;
-    }
-
-    public void setProgressReportPercent(int progressReportPercent) {
-        this.progressReportPercent = progressReportPercent;
-    }
 
     public Stage getStage() {
         return stage;

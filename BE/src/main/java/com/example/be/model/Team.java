@@ -20,6 +20,8 @@ public class Team {
     @OneToMany(mappedBy = "team")
     private Set<Student> studentSet;
 
+    private Long leaderId;
+
     public Team() {
     }
 

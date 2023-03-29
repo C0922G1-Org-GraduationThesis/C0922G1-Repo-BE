@@ -24,6 +24,9 @@ public class Project {
     @JsonIgnore
     @OneToMany(mappedBy = "project")
     private Set<ProgressReport> progressReportSet;
+    @JsonIgnore
+    @OneToMany(mappedBy = "project")
+    private Set<ProgressReview> progressReviews;
     @OneToOne(mappedBy = "project")
     private Team team;
 

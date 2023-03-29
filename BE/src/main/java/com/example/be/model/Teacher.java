@@ -43,6 +43,9 @@ public class Teacher {
     @OneToMany(mappedBy = "teacher")
     @JsonIgnore
     private Set<NotificationTeacher> notificationTeacherSet;
+    @OneToMany(mappedBy = "teacher")
+    @JsonIgnore
+    private Set<ProgressReview> progressReviews;
     @OneToOne(mappedBy = "teacher")
     private Clazz clazz;
     @OneToMany(mappedBy = "teacher")
