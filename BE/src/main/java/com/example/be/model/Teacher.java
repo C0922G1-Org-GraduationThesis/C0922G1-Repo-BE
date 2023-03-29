@@ -38,8 +38,9 @@ public class Teacher {
     @OneToOne
     @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     private Account account;
-    @OneToOne(mappedBy = "teacher")
-    private Team team;
+    @OneToMany(mappedBy = "teacher")
+    @JsonIgnore
+    private Set<Team> teamSet;
     @OneToMany(mappedBy = "teacher")
     @JsonIgnore
     private Set<NotificationTeacher> notificationTeacherSet;
@@ -77,13 +78,12 @@ public class Teacher {
         this.notificationTeacherSet = notificationTeacherSet;
     }
 
-
-    public Team getTeam() {
-        return team;
+    public Set<Team> getTeamSet() {
+        return teamSet;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setTeamSet(Set<Team> teamSet) {
+        this.teamSet = teamSet;
     }
 
     public Long getTeacherId() {
