@@ -20,10 +20,9 @@ public interface ITeamRepository extends JpaRepository<Team, Long> {
      * Created by: DucND
      * Date create: 29/03/2023
      * Function: display list teacher with column teacher_name, registration status and paging
-     * @param pageable
+     * @param: pageable
      * @return get all list teacher
      */
-
     @Query(value = "select tc.teacher_name as teacher, count(t.teacher_id) as total " +
             "from teacher as tc " +
             "left join team as t on t.teacher_id = tc.teacher_id " +
@@ -43,28 +42,19 @@ public interface ITeamRepository extends JpaRepository<Team, Long> {
      * Created by: DucND
      * Date create: 29/03/2023
      * Function: find team by id
-     * @param teamId
+     * @param: teamId
      * @return the team you are looking for
      */
-
     @Query(value = "select * from team where team_id = :teamId", nativeQuery = true)
     Team findTeamById(@Param("teamId") Long id);
-
-//    @Query(value = "select t.date_of_birth as DOB, t.email, t.img, t.phone_number, " +
-//            "t.teacher_address as address,t.teacher_code as code, t.teacher_gender as gender," +
-//            " t.teacher_name as name from teacher as t where t.teacher_id = :teacherId and t.flag_delete = false",
-//            nativeQuery = true)
-//    Teacher findTeacherById(@Param("teacherId") Long id);
-
 
     /**
      * Created by: DucND
      * Date create: 29/03/2023
      * Function: edit team,create teacher for group
-     * @param teacherId and teamId
+     * @param: teacherId and teamId
      * @result change instructor of team
      */
-
     @Modifying
     @Query(value = "update team set teacher_id = :teacherId where team_id = :teamId", nativeQuery = true)
     void updateTeam(@Param("teacherId") Long teacherId, @Param("teamId") Long teamId);

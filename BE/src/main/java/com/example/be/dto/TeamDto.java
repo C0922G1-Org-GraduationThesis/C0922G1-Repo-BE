@@ -1,9 +1,5 @@
 package com.example.be.dto;
 
-/**
- * Created by: DucND
- * Date create: 29/03/2023
- */
 public class TeamDto {
 
     private Long teamId;

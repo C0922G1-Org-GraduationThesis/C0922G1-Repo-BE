@@ -19,7 +19,6 @@ public interface ITeamService {
      * Function: find team by id
      */
     Team findTeamById(Long id);
-//    Teacher findTeacherById(Long id);
 
     /**
      * Created by: DucND

@@ -18,10 +18,9 @@ public class TeamService implements ITeamService {
      * Created by: DucND
      * Date create: 29/03/2023
      * Function: get all teacher and paging
-     * @param pageable
+     * @param: pageable
      * @return list instructor and paging
      */
-
     @Override
     public Page<TeacherDto> getAllInstructor(Pageable pageable) {
         return teamRepository.getAllInstructor(pageable);
@@ -34,25 +33,17 @@ public class TeamService implements ITeamService {
      * @param id
      * @return the team you looking for
      */
-
     @Override
     public Team findTeamById(Long id) {
         return teamRepository.findTeamById(id);
     }
 
-//    @Override
-//    public Teacher findTeacherById(Long id) {
-//        return teamRepository.findTeacherById(id);
-//    }
-
     /**
      * Created by: DucND
      * Date create: 29/03/2023
      * Function: add or edit instructor for team
-     * @param teacherId, teamId
-     * @result team with parameter need to be changed
+     * @param: teacherId, teamId
      */
-
     @Override
     public void updateTeam(Long teacherId, Long teamId) {
         teamRepository.updateTeam(teacherId,teamId);
