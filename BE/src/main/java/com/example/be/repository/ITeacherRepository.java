@@ -17,8 +17,12 @@ import java.util.Optional;
 
 public interface ITeacherRepository extends JpaRepository<Teacher, Long> {
     /**
-     * tên : phan văn hùng
-     * nội dung: tạo phương thức hiển thị danh sách giáo viên với query thuần
+     * create by : HungPV ,
+     * Date Create : 29/03/2023
+     * Function : show list has paging and search
+     * @param name
+     * @param pageable
+     * @return Page<ITeacherDto>
      */
     @Query(value = "select `teacher`.teacher_id as teacherId,`teacher`.teacher_name as teacherName\n" +
             "            ,`teacher`.teacher_code as teacherCode, `teacher`.img as teacherImg,`teacher`.phone_number as teacherPhoneNumber\n" +
@@ -29,8 +33,12 @@ public interface ITeacherRepository extends JpaRepository<Teacher, Long> {
     Page<ITeacherDto> getAllTeacher(@Param("nameSearch") String name, Pageable pageable);
 
     /**
-     * tên : phan văn hùng
-     * nội dung: tạo phương thức lấy giáo viên theo id vơi query thuần
+     * create by : HungPV ,
+     * Date Create : 29/03/2023
+     * Function : get teacher by id
+     *
+     * @param id
+     * @return Optional<ITeacherDto>
      */
     @Query(value = "select `teacher`.teacher_id as teacherId,`teacher`.teacher_name as teacherName\n" +
             "            ,`teacher`.teacher_code as teacherCode, `teacher`.img as teacherImg,`teacher`.phone_number as teacherPhoneNumber\n" +
@@ -41,14 +49,17 @@ public interface ITeacherRepository extends JpaRepository<Teacher, Long> {
     Optional<ITeacherDto> findTeacherById(@Param("id") Long id);
 
     /**
-     * tên : phan văn hùng
-     * nội dung: tạo phương thức xóa giáo viên theo id vơi query thuần
+     * create by : HungPV ,
+     * Date Create : 29/03/2023
+     * Function : delete teacher by id
+     *
+     * @param teacherId
+     * @return void
      */
     @Transactional
     @Modifying
     @Query(value = "update teacher set teacher.flag_delete = 1 where teacher_id = :teacherId ", nativeQuery = true)
     void deleteTeacherById(@Param("teacherId") long teacherId);
-
 }
 
 

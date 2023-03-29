@@ -20,10 +20,12 @@ public class TeacherController {
     private TeacherService teacherService;
 
     /**
-     * tên : phan văn hùng
-     * nội dung: đổ list có phân trang và tìm kiếm theo tên
-     * tham số truyền vào : tên tìm kiếm và pageable
-     * return : Page teacher
+     *create by : HungPV ,
+     * Date Create : 29/03/2023
+     * Function : show list has paging and search
+     * @param name
+     * @param pageable
+     * @return HttpStatus.BAD_REQUEST if result is error or HttpStatus.OK if result is not error
      */
     @GetMapping("/list")
     public ResponseEntity<Page<ITeacherDto>> getAllTeacher(@RequestParam(defaultValue = "") String name,
@@ -36,10 +38,11 @@ public class TeacherController {
     }
 
     /**
-     * tên : phan văn hùng
-     * nội dung: tìm kiếm theo id
-     * tham số truyền vào : id cần tìm kiếm
-     * return : teacher
+     *create by : HungPV ,
+     * Date Create : 29/03/2023
+     * Function : get teacher by id
+     * @param id
+     * @return HttpStatus.NOT_FOUND if result is error or HttpStatus.OK if result is not error
      */
     @GetMapping("/list/{id}")
     public ResponseEntity<ITeacherDto> getTeacherById(@PathVariable Long id) {
@@ -49,10 +52,11 @@ public class TeacherController {
     }
 
     /**
-     * tên : phan văn hùng
-     * nội dung: xóa 1 giáo viên theo id
-     * tham số truyền vào : id cần xóa
-     * return : trạng thái
+     *create by : HungPV ,
+     * Date Create : 29/03/2023
+     * Function : delete teacher by id
+     * @param id
+     * @return notFound if delete is error HttpStatus.OK if result is not error
      */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<ITeacherDto> deleteTeacherById(@PathVariable Long id) {

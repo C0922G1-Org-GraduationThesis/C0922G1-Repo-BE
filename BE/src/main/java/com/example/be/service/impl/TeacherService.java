@@ -16,10 +16,12 @@ public class TeacherService implements ITeacherService {
     private ITeacherRepository teacherRepository;
 
     /**
-     * tên : phan văn hùng
-     * nội dung:phương thức lấy danh sách giáo viên có tìm kiếm và phân trang
-     * tham số truyền vào : tên cần tìm và pageable để phân trang
-     * return : page
+     *create by : HungPV ,
+     * Date Create : 29/03/2023
+     * Function : show list has paging and search
+     * @param name
+     * @param pageable
+     * @return Page<ITeacherDto>
      */
     @Override
     public Page<ITeacherDto> getAllTeacher(String name, Pageable pageable) {
@@ -27,10 +29,11 @@ public class TeacherService implements ITeacherService {
     }
 
     /**
-     * tên : phan văn hùng
-     * nội dung: phuoương thức tìm kiếm theo id
-     * tham số truyền vào : id cần tìm kiếm
-     * return : teacher
+     *create by : HungPV ,
+     * Date Create : 29/03/2023
+     * Function : get teacher by id
+     * @param id
+     * @return Optional<ITeacherDto>
      */
     @Override
     public Optional<ITeacherDto> findTeacherById(Long id) {
@@ -38,10 +41,11 @@ public class TeacherService implements ITeacherService {
     }
 
     /**
-     * tên : phan văn hùng
-     * nội dung:tạo phương thức xóa 1 giáo viên theo id
-     * tham số truyền vào : id cần xóa
-     * return : trạng thái
+     *create by : HungPV ,
+     * Date Create : 29/03/2023
+     * Function : delete teacher by id
+     * @param id
+     * @return void
      */
     @Override
     public void deleteTeacherById(long id) {

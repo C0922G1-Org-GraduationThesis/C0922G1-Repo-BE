@@ -1,8 +1,9 @@
 package com.example.be.dto;
 /**
- * tên : phan văn hùng
- * nội dung: tạo interface để lấy các trường cần hiển thị
- *
+ *create by : HungPV ,
+ * Date Create : 29/03/2023
+ * Function : ITeacherDto
+ * @return method getter
  */
 public interface ITeacherDto {
     String getTeacherId();
