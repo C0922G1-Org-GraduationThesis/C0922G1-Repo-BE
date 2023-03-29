@@ -19,11 +19,12 @@ public class Project {
     private String img;
     @Column(columnDefinition = "text", nullable = false)
     private String description;
-    @Column(columnDefinition = "bit(1)")
-    private boolean projectStatus;
+    @Column(columnDefinition = "text",nullable = false)
+    private String projectStatus;
     @JsonIgnore
     @OneToMany(mappedBy = "project")
     private Set<ProgressReport> progressReportSet;
+    @JsonIgnore
     @OneToOne(mappedBy = "project")
     private Team team;
 
@@ -50,12 +51,12 @@ public class Project {
         return projectId;
     }
 
-    public boolean isProjectStatus() {
+    public String getProjectStatus() {
         return projectStatus;
     }
 
-    public void setProjectStatus(boolean status) {
-        this.projectStatus = status;
+    public void setProjectStatus(String projectStatus) {
+        this.projectStatus = projectStatus;
     }
 
     public void setProjectId(Long projectId) {

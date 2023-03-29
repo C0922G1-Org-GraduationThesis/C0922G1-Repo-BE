@@ -30,13 +30,13 @@ public class Teacher {
     @Column(columnDefinition = "bit(1)")
     private boolean flagDelete;
     @ManyToOne
-    @JoinColumn(name = "faculty_id", referencedColumnName = "faculty_id")
+    @JoinColumn(name = "faculty", referencedColumnName = "faculty_id")
     private Faculty faculty;
     @ManyToOne
-    @JoinColumn(name = "degree_id", referencedColumnName = "degree_id")
+    @JoinColumn(name = "degree", referencedColumnName = "degree_id")
     private Degree degree;
     @OneToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
+    @JoinColumn(name = "account", referencedColumnName = "account_id")
     private Account account;
     @OneToOne(mappedBy = "teacher")
     private Team team;
