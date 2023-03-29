@@ -49,7 +49,19 @@ public class Teacher {
     @JsonIgnore
     private Set<Document> documentSet;
 
+    @OneToMany(mappedBy = "teacher")
+    @JsonIgnore
+    private Set<Answers> answersSet;
+
     public Teacher() {
+    }
+
+    public Set<Answers> getAnswersSet() {
+        return answersSet;
+    }
+
+    public void setAnswersSet(Set<Answers> answersSet) {
+        this.answersSet = answersSet;
     }
 
     public boolean isFlagDelete() {

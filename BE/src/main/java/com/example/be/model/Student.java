@@ -41,19 +41,20 @@ public class Student {
     @OneToMany(mappedBy = "student")
     @JsonIgnore
     private Set<StudentAnnouncement> studentAnnouncementSet;
-    @OneToMany(mappedBy = "student")
-    @JsonIgnore
-    private Set<QuestionAndAnswer> questionAndAnswerSet;
+
+    @ManyToOne
+    @JoinColumn(name = "question_id", referencedColumnName = "question_id")
+    private Question question;
 
     public Student() {
     }
 
-    public Set<QuestionAndAnswer> getQuestionAndAnswerSet() {
-        return questionAndAnswerSet;
+    public Question getQuestion() {
+        return question;
     }
 
-    public void setQuestionAndAnswerSet(Set<QuestionAndAnswer> questionAndAnswerSet) {
-        this.questionAndAnswerSet = questionAndAnswerSet;
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
     public Set<StudentAnnouncement> getStudentAnnouncementSet() {
