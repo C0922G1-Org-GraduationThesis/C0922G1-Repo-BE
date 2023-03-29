@@ -1,6 +1,8 @@
 package com.example.be.controller;
 
 import com.example.be.dto.TeamDTO;
+import com.example.be.model.Project;
+import com.example.be.model.Teacher;
 import com.example.be.model.Team;
 import com.example.be.service.ITeamService;
 import org.springframework.beans.BeanUtils;
@@ -15,8 +17,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
@@ -30,7 +31,7 @@ public class TeamRestController {
      * Date create: 29/03/2023
      * Function: find all team by name containing
      *
-     * @return HttpStatus.OK if result is not error else return HttpStatus.NO_CONTENT
+     * @return HttpStatus.OK if result is not error else return HttpStatus.NO_CONTENT if result is empty
      * @Param: teamName, size, page
      */
     @GetMapping("/")
@@ -55,26 +56,24 @@ public class TeamRestController {
      * @Param: teamDTO, bindingResult
      */
     @PostMapping("/save")
-    public ResponseEntity<?> saveTeam(@Validated @RequestBody TeamDTO teamDTO, BindingResult bindingResult) {
+    public ResponseEntity<List<FieldError>> saveTeam(@Validated @RequestBody TeamDTO teamDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            Map<String, String> map = bindingResult.getFieldErrors().stream()
-                    .collect(Collectors.toMap(FieldError::getField, c -> c.getDefaultMessage()));
-
-            TeamDTO teamDTOError = new TeamDTO(
-                    map.get("teamName")
-            );
-
-            return new ResponseEntity<>(teamDTOError, HttpStatus.EXPECTATION_FAILED);
+            return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.NOT_ACCEPTABLE);
         }
 
         Team team = new Team();
         BeanUtils.copyProperties(teamDTO, team);
-        Team team1 = this.teamService.saveTeam(team);
+        Project project = new Project();
+        project.setProjectId(teamDTO.getProject().getProjectId());
+        team.setProject(project);
+        Teacher teacher = new Teacher();
+        teacher.setTeacherId(teamDTO.getTeacher().getTeacherId());
+        team.setTeacher(teacher);
 
-        if (team1 != null) {
-            return new ResponseEntity<>(team1, HttpStatus.OK);
+        if (this.teamService.saveTeam(team) != null) {
+            return new ResponseEntity<>(HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 
     /**
@@ -82,7 +81,7 @@ public class TeamRestController {
      * Date create: 29/03/2023
      * Function: find team by id
      *
-     * @return HttpStatus.OK if result is not error else return HttpStatus.NO_CONTENT
+     * @return HttpStatus.OK if result is not error else return HttpStatus.NO_CONTENT if result is empty
      * @Param: id
      */
     @GetMapping("/{id}")

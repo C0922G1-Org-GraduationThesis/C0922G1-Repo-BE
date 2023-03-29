@@ -31,7 +31,7 @@ public class ProjectDTO {
     private String description;
     private boolean projectStatus;
     private Set<ProgressReport> progressReportSet;
-    private Team team;
+    private TeamDTO teamDTO;
 
     public ProjectDTO(String name, String content, String img, String description) {
         this.name = name;
@@ -96,11 +96,11 @@ public class ProjectDTO {
         this.progressReportSet = progressReportSet;
     }
 
-    public Team getTeam() {
-        return team;
+    public TeamDTO getTeamDTO() {
+        return teamDTO;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setTeamDTO(TeamDTO teamDTO) {
+        this.teamDTO = teamDTO;
     }
 }

@@ -2,6 +2,7 @@ package com.example.be.controller;
 
 import com.example.be.dto.ProjectDTO;
 import com.example.be.model.Project;
+import com.example.be.model.Team;
 import com.example.be.service.IProjectService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -31,7 +33,7 @@ public class ProjectRestController {
      * Date create: 29/03/2023
      * Function: find all project by name containing
      *
-     * @return HttpStatus.OK if result is not error else return HttpStatus.NO_CONTENT
+     * @return HttpStatus.OK, else return HttpStatus.NO_CONTENT if result is empty
      * @Param: searchName, size, page
      */
 
@@ -53,33 +55,26 @@ public class ProjectRestController {
      * Date create: 29/03/2023
      * Function: save project
      *
-     * @return HttpStatus.OK if result is not error else return HttpStatus.EXPECTATION_FAILED
+     * @return HttpStatus.OK if result is not error else return HttpStatus.NOT_ACCEPTABLE
      * @Param: projectDTO, bindingResult
      */
     @PostMapping("/save")
-    public ResponseEntity<?> saveProject(@Validated @RequestBody ProjectDTO projectDTO,
-                                         BindingResult bindingResult) {
+    public ResponseEntity<List<FieldError>> saveProject(@Validated @RequestBody ProjectDTO projectDTO,
+                                                        BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            Map<String, String> map = bindingResult.getFieldErrors().stream()
-                    .collect(Collectors.toMap(FieldError::getField, c -> c.getDefaultMessage()));
-
-            ProjectDTO projectDTOError = new ProjectDTO(
-                    map.get("name"),
-                    map.get("content"),
-                    map.get("img"),
-                    map.get("description")
-            );
-            return new ResponseEntity<>(projectDTOError, HttpStatus.EXPECTATION_FAILED);
+            return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.NOT_ACCEPTABLE);
         }
 
         Project project = new Project();
         BeanUtils.copyProperties(projectDTO, project);
-        Project project1 = this.projectService.save(project);
+        Team team = new Team();
+        team.setTeamId(projectDTO.getTeamDTO().getTeamId());
+        project.setTeam(team);
 
-        if (project1 != null) {
-            return new ResponseEntity<>(project1, HttpStatus.OK);
+        if (this.projectService.save(project) != null) {
+            return new ResponseEntity<>(HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 
     /**
@@ -87,10 +82,10 @@ public class ProjectRestController {
      * Date create: 29/03/2023
      * Function: find project by id
      *
-     * @return HttpStatus.OK if result is not error else return HttpStatus.EXPECTATION_FAILED
+     * @return HttpStatus.OK if result not null else return HttpStatus.NO_CONTENT
      * @Param: id
      */
-    @GetMapping("/{id}")
+    @GetMapping("/detail/{id}")
     public ResponseEntity<Project> findById(@PathVariable Long id) {
         Project project = this.projectService.findById(id);
 

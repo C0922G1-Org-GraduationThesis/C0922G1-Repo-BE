@@ -11,7 +11,6 @@ public interface ITeamService {
      * Date create: 29/03/2023
      * Function: find all team by name containing
      *
-     * @return list page team if result is not error else return null
      * @Param: teamName, pageable
      */
     Page<Team> findAll(String teamName, Pageable pageable);
@@ -21,7 +20,6 @@ public interface ITeamService {
      * Date create: 29/03/2023
      * Function: find by team id
      *
-     * @return team if result is not error else return null
      * @Param: id
      */
     Team findById(Long id);
@@ -31,7 +29,6 @@ public interface ITeamService {
      * Date create: 29/03/2023
      * Function: save team
      *
-     * @return team if result is not error else return null
      * @Param: team
      */
     Team saveTeam(Team team);

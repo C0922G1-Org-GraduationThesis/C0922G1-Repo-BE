@@ -22,7 +22,7 @@ public class StudentRestController {
      * Date create: 29/03/2023
      * Function: find all student by name containing or code containing
      *
-     * @return HttpStatus.OK if result is not error else return HttpStatus.NO_CONTENT
+     * @return HttpStatus.OK if result is not error, return HttpStatus.NO_CONTENT if result is empty
      * @Param: searchStr, size, page
      */
     @GetMapping("/")
@@ -44,10 +44,10 @@ public class StudentRestController {
      * Date create: 29/03/2023
      * Function: find all student by team id
      *
-     * @return HttpStatus.OK if result is not error else return HttpStatus.NO_CONTENT
+     * @return HttpStatus.OK if result is not error, return HttpStatus.NO_CONTENT if result is empty
      * @Param: teamId, size, page
      */
-    @GetMapping("/{teamId}")
+    @GetMapping("/team/{teamId}")
     public ResponseEntity<Page<Student>> findAllByTeamId
     (@PathVariable Long teamId,
      @RequestParam(required = false, defaultValue = "5") int size,

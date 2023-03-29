@@ -16,7 +16,6 @@ public interface ITeamRepository extends JpaRepository<Team, Long> {
      * Date create: 29/03/2023
      * Function: find all team by name containing
      *
-     * @return list page team if result is not error else return null
      * @Param: teamName, pageable
      */
     @Query(value = "" +
@@ -35,7 +34,6 @@ public interface ITeamRepository extends JpaRepository<Team, Long> {
      * Date create: 29/03/2023
      * Function: find team by id
      *
-     * @return  team if result is not error else return null
      * @Param: id
      */
     @Query(value = "" +
@@ -54,7 +52,6 @@ public interface ITeamRepository extends JpaRepository<Team, Long> {
      * Date create: 29/03/2023
      * Function: save team
      *
-     * @return  team if result is not error else return null
      * @Param: teamName, projectId, teacherId
      */
     @Transactional
@@ -72,7 +69,6 @@ public interface ITeamRepository extends JpaRepository<Team, Long> {
      * Date create: 29/03/2023
      * Function: find all team by name
      *
-     * @return team if result is not error else return null
      * @Param: teamName
      */
     @Query(value = "" +

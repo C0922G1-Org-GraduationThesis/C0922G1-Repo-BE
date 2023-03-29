@@ -16,7 +16,6 @@ public interface IProjectRepository extends JpaRepository<Project, Long> {
      * Date create: 29/03/2023
      * Function: save project
      *
-     * @return project if result is not error else return null
      * @Param: name, content, description, img
      */
     @Transactional
@@ -35,7 +34,6 @@ public interface IProjectRepository extends JpaRepository<Project, Long> {
      * Date create: 29/03/2023
      * Function: find by id project
      *
-     * @return project if result is not error else return null
      * @Param: id
      */
     @Query(value = "" +
@@ -55,7 +53,6 @@ public interface IProjectRepository extends JpaRepository<Project, Long> {
      * Date create: 29/03/2023
      * Function: find by name project
      *
-     * @return project if result is not error else return null
      * @Param: name
      */
     @Query(value = "" +
@@ -75,7 +72,6 @@ public interface IProjectRepository extends JpaRepository<Project, Long> {
      * Date create: 29/03/2023
      * Function: find by name containing project
      *
-     * @return list page project if result is not error else return null
      * @Param: project, pageable
      */
     @Query(value = "" +
