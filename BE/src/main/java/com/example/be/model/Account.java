@@ -12,9 +12,9 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_id")
     private Long accountId;
-    @Column(columnDefinition = "varchar(50)", nullable = false)
-    private String password = "12345678";
-    @Column(columnDefinition = "varchar(50)", unique = true, nullable = false)
+    @Column(columnDefinition = "varchar(50)",nullable = false)
+    private String password;
+    @Column(columnDefinition = "varchar(50)", unique = true,nullable = false)
     private String email;
     @OneToMany(mappedBy = "account")
     @JsonIgnore

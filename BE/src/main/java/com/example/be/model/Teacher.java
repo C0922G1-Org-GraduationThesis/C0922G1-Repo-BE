@@ -52,6 +52,19 @@ public class Teacher {
     public Teacher() {
     }
 
+    public Teacher(Long teacherId, String teacherName, String dateOfBirth, String email, String phoneNumber, boolean teacherGender, String teacherAddress, String img, Faculty faculty, Degree degree) {
+        this.teacherId = teacherId;
+        this.teacherName = teacherName;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.teacherGender = teacherGender;
+        this.teacherAddress = teacherAddress;
+        this.img = img;
+        this.faculty = faculty;
+        this.degree = degree;
+    }
+
     public boolean isFlagDelete() {
         return flagDelete;
     }
