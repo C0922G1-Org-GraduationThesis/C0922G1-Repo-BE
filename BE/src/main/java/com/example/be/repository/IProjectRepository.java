@@ -15,16 +15,15 @@ public interface IProjectRepository extends JpaRepository<Project,Long> {
      */
 
     @Modifying
-    @Query(value = "update `project` set project_status = 'approved' where project_Id = :projectId",nativeQuery = true)
+    @Query(value = "update `project` set project_status = true where project_Id = :projectId",nativeQuery = true)
     void updatePro(@Param("projectId") Long projectId);
-
     /**
      * Created by: NuongHT
      * Date create: 29/03/2023
      */
 
     @Modifying
-    @Query(value = "update `project` set project_status = 'rejected' where project_Id = :projectId",nativeQuery = true)
+    @Query(value = "update `project` set project_status = false where project_Id = :projectId",nativeQuery = true)
     void updatePro2(@Param("projectId") Long projectId);
 
     /**

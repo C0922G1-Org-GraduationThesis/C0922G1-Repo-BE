@@ -36,6 +36,7 @@ public class Student {
     @JoinColumn(name = "clazz_id", referencedColumnName = "clazz_id")
     private Clazz clazz;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "team_id", referencedColumnName = "team_id")
     private Team team;
     @OneToMany(mappedBy = "student")

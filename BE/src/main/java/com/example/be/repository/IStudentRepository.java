@@ -18,7 +18,7 @@ public interface IStudentRepository extends JpaRepository<Student,Long> {
 
     @Modifying
     @Query(value = "select s.student_id as studentId,te.team_id as teamId,p.project_id as projectId,p.name as projectName,te.team_name as teamName,s.email as email" +
-            "            from student s join team te on te.team_id = s.id_team join project p on p.project_id = te.id_project join teacher t on te.id_teacher = t.teacher_id" +
+            "            from student s join team te on te.team_id = s.team_id join project p on p.project_id = te.project_id join teacher t on te.teacher_id = t.teacher_id" +
             "            where te.team_id = :teamId", nativeQuery = true)
     List<StudentDto> getInfomation(@Param("teamId") Long teamId);
 }

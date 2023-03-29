@@ -43,11 +43,11 @@ public class StudentService implements IStudentService {
     public String getTeam(long projectId) {
         // Thực hiện truy vấn cơ sở dữ liệu để lấy thông tin về đề tài
         Project project = iProjectRepository.findProById(projectId);
-        if (project != null) {
+        if (project == null) {
             // Trả về tên của đề tài
-            return project.getTeam().getTeamName();
+            return "hi";
         } else {
-            return null;
+            return project.getTeam().getTeamName();
         }
     }
 

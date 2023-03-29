@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.mail.internet.AddressException;
 import java.util.List;
 
-
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/pro")

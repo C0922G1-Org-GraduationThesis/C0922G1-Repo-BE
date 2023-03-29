@@ -38,6 +38,7 @@ public class Teacher {
     @OneToOne
     @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     private Account account;
+    @JsonIgnore
     @OneToOne(mappedBy = "teacher")
     private Team team;
     @OneToMany(mappedBy = "teacher")
