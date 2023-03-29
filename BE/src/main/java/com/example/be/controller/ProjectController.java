@@ -16,11 +16,19 @@ import org.springframework.web.bind.annotation.*;
 public class ProjectController {
     @Autowired
     private IProjectService projectService;
-
+    /**
+     * Created by: hoangNNH
+     * Date created: 29/03/2023
+     * Function: get project list
+     *
+     * @param page, name
+     * @return HttpStatus.NO_CONTENT if result is error or HttpStatus.OK if result is not error
+     */
     @GetMapping("")
     public ResponseEntity<Page<Project>> pagingAndGetAllProject(
+            @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "", required = false) String name) {
-        Pageable pageable = PageRequest.of(0, 3);
+        Pageable pageable = PageRequest.of(page, 3);
         Page<Project> projectPage = this.projectService.getAllProject(pageable, name);
         if (!projectPage.hasContent()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

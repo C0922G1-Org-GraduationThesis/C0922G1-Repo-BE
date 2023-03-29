@@ -8,6 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface IProjectRepository extends JpaRepository<Project, Long> {
+    /**
+     * Created by: hoangNNH
+     * Date created: 29/03/2023
+     * Function: get project list
+     *
+     * @param pageable, name
+     */
     @Query(value = "select * from `project` " +
             "where `name` like concat('%', :name, '%')" +
             "and `project_status` = true ", nativeQuery = true)

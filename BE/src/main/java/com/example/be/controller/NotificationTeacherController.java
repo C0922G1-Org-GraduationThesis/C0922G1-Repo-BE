@@ -18,7 +18,13 @@ import java.util.List;
 public class NotificationTeacherController {
     @Autowired
     private INotificationTeacherService notificationTeacherService;
-
+    /**
+     * Created by: hoangNNH
+     * Date created: 29/03/2023
+     * Function: get project list
+     *
+     * @return HttpStatus.NO_CONTENT if result is empty or HttpStatus.OK if result is not empty
+     */
     @GetMapping("")
     public ResponseEntity<List<NotificationTeacher>> getAllNotificationTeacher() {
         List<NotificationTeacher> notificationTeacherList = this.notificationTeacherService.getAll();

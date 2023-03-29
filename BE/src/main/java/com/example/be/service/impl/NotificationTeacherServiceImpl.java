@@ -11,6 +11,13 @@ import java.util.List;
 public class NotificationTeacherServiceImpl implements INotificationTeacherService {
     @Autowired
     private INotificationTeacherRepository notificationTeacherRepository;
+    /**
+     * Created by: hoangNNH
+     * Date created: 29/03/2023
+     * Function: get notification teacher list
+     *
+     * @return notification list
+     */
     @Override
     public List<NotificationTeacher> getAll() {
         return this.notificationTeacherRepository.getAllNotificationTeacher();

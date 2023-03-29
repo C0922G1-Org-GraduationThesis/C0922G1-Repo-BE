@@ -5,5 +5,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface IProjectService {
+    /**
+     * Created by: hoangNNH
+     * Date created: 29/03/2023
+     * Function: get project list
+     *
+     * @param pageable, name
+     */
     Page<Project> getAllProject(Pageable pageable, String name);
 }

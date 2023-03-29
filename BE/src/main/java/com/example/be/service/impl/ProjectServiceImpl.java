@@ -12,6 +12,14 @@ import org.springframework.stereotype.Service;
 public class ProjectServiceImpl implements IProjectService {
     @Autowired
     private IProjectRepository projectRepository;
+    /**
+     * Created by: hoangNNH
+     * Date created: 29/03/2023
+     * Function: get project list
+     *
+     * @param pageable, name
+     * @return project list
+     */
     @Override
     public Page<Project> getAllProject(Pageable pageable, String name) {
         return this.projectRepository.getAllProject(pageable, name);
