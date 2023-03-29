@@ -29,15 +29,15 @@ public class Student {
     private String img;
     @Column(columnDefinition = "bit(1)")
     private boolean flagDelete;
-    @OneToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
-    private Account account;
+//    @OneToOne
+//    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
+//    private Account account;
     @ManyToOne
     @JoinColumn(name = "clazz_id", referencedColumnName = "clazz_id")
     private Clazz clazz;
-    @ManyToOne
-    @JoinColumn(name = "team_id", referencedColumnName = "team_id")
-    private Team team;
+//    @ManyToOne
+//    @JoinColumn(name = "team_id", referencedColumnName = "team_id")
+//    private Team team;
     @OneToMany(mappedBy = "student")
     @JsonIgnore
     private Set<StudentAnnouncement> studentAnnouncementSet;
@@ -48,20 +48,20 @@ public class Student {
     public Student() {
     }
 
-    public Set<QuestionAndAnswer> getQuestionAndAnswerSet() {
-        return questionAndAnswerSet;
-    }
-
-    public void setQuestionAndAnswerSet(Set<QuestionAndAnswer> questionAndAnswerSet) {
-        this.questionAndAnswerSet = questionAndAnswerSet;
-    }
-
-    public Set<StudentAnnouncement> getStudentAnnouncementSet() {
-        return studentAnnouncementSet;
-    }
-
-    public void setStudentAnnouncementSet(Set<StudentAnnouncement> studentAnnouncementSet) {
+    public Student(Long studentId, String studentName, String studentCode, String dateOfBirth, String email, String phoneNumber, boolean studentGender, String studentAddress, String img, boolean flagDelete, Clazz clazz, Set<StudentAnnouncement> studentAnnouncementSet, Set<QuestionAndAnswer> questionAndAnswerSet) {
+        this.studentId = studentId;
+        this.studentName = studentName;
+        this.studentCode = studentCode;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.studentGender = studentGender;
+        this.studentAddress = studentAddress;
+        this.img = img;
+        this.flagDelete = flagDelete;
+        this.clazz = clazz;
         this.studentAnnouncementSet = studentAnnouncementSet;
+        this.questionAndAnswerSet = questionAndAnswerSet;
     }
 
     public Long getStudentId() {
@@ -144,15 +144,6 @@ public class Student {
         this.flagDelete = flagDelete;
     }
 
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
     public Clazz getClazz() {
         return clazz;
     }
@@ -161,11 +152,19 @@ public class Student {
         this.clazz = clazz;
     }
 
-    public Team getTeam() {
-        return team;
+    public Set<StudentAnnouncement> getStudentAnnouncementSet() {
+        return studentAnnouncementSet;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setStudentAnnouncementSet(Set<StudentAnnouncement> studentAnnouncementSet) {
+        this.studentAnnouncementSet = studentAnnouncementSet;
+    }
+
+    public Set<QuestionAndAnswer> getQuestionAndAnswerSet() {
+        return questionAndAnswerSet;
+    }
+
+    public void setQuestionAndAnswerSet(Set<QuestionAndAnswer> questionAndAnswerSet) {
+        this.questionAndAnswerSet = questionAndAnswerSet;
     }
 }

@@ -43,8 +43,8 @@ public class Teacher {
     @OneToMany(mappedBy = "teacher")
     @JsonIgnore
     private Set<NotificationTeacher> notificationTeacherSet;
-    @OneToOne(mappedBy = "teacher")
-    private Clazz clazz;
+//    @OneToOne(mappedBy = "teacher")
+//    private Clazz clazz;
     @OneToMany(mappedBy = "teacher")
     @JsonIgnore
     private Set<Document> documentSet;
@@ -52,38 +52,23 @@ public class Teacher {
     public Teacher() {
     }
 
-    public boolean isFlagDelete() {
-        return flagDelete;
-    }
-
-    public void setFlagDelete(boolean flagDelete) {
+    public Teacher(Long teacherId, String teacherCode, String teacherName, String dateOfBirth, String email, String phoneNumber, boolean teacherGender, String teacherAddress, String img, boolean flagDelete, Faculty faculty, Degree degree, Account account, Team team, Set<NotificationTeacher> notificationTeacherSet, Set<Document> documentSet) {
+        this.teacherId = teacherId;
+        this.teacherCode = teacherCode;
+        this.teacherName = teacherName;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.teacherGender = teacherGender;
+        this.teacherAddress = teacherAddress;
+        this.img = img;
         this.flagDelete = flagDelete;
-    }
-
-
-    public Clazz getClazz() {
-        return clazz;
-    }
-
-    public void setClazz(Clazz clazz) {
-        this.clazz = clazz;
-    }
-
-    public Set<NotificationTeacher> getNotificationTeacherSet() {
-        return notificationTeacherSet;
-    }
-
-    public void setNotificationTeacherSet(Set<NotificationTeacher> notificationTeacherSet) {
-        this.notificationTeacherSet = notificationTeacherSet;
-    }
-
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
+        this.faculty = faculty;
+        this.degree = degree;
+        this.account = account;
         this.team = team;
+        this.notificationTeacherSet = notificationTeacherSet;
+        this.documentSet = documentSet;
     }
 
     public Long getTeacherId() {
@@ -158,6 +143,14 @@ public class Teacher {
         this.img = img;
     }
 
+    public boolean isFlagDelete() {
+        return flagDelete;
+    }
+
+    public void setFlagDelete(boolean flagDelete) {
+        this.flagDelete = flagDelete;
+    }
+
     public Faculty getFaculty() {
         return faculty;
     }
@@ -180,6 +173,22 @@ public class Teacher {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public Set<NotificationTeacher> getNotificationTeacherSet() {
+        return notificationTeacherSet;
+    }
+
+    public void setNotificationTeacherSet(Set<NotificationTeacher> notificationTeacherSet) {
+        this.notificationTeacherSet = notificationTeacherSet;
     }
 
     public Set<Document> getDocumentSet() {

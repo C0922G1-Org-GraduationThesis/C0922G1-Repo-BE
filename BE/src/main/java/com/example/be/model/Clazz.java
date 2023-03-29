@@ -19,11 +19,19 @@ public class Clazz {
     @OneToMany(mappedBy = "clazz")
     @JsonIgnore
     private Set<Student> studentSet;
-    @OneToOne
-    @JoinColumn(name = "teacher_id",referencedColumnName = "teacher_id")
-    private Teacher teacher;
+//    @OneToOne
+//    @JoinColumn(name = "teacher_id",referencedColumnName = "teacher_id")
+//    private Teacher teacher;
+
 
     public Clazz() {
+    }
+
+    public Clazz(Long clazzId, String clazzName, Faculty faculty, Set<Student> studentSet) {
+        this.clazzId = clazzId;
+        this.clazzName = clazzName;
+        this.faculty = faculty;
+        this.studentSet = studentSet;
     }
 
     public Long getClazzId() {
@@ -56,13 +64,5 @@ public class Clazz {
 
     public void setStudentSet(Set<Student> studentSet) {
         this.studentSet = studentSet;
-    }
-
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
     }
 }

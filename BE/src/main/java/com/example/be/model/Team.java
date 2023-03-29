@@ -17,22 +17,22 @@ public class Team {
     @OneToOne
     @JoinColumn(name = "project_id", referencedColumnName = "project_id")
     private Project project;
-    @OneToMany(mappedBy = "team")
-    private Set<Student> studentSet;
+//    @OneToMany(mappedBy = "team")
+//    private Set<Student> studentSet;
+
 
     public Team() {
     }
 
+    public Team(Long teamId, String teamName, Teacher teacher, Project project) {
+        this.teamId = teamId;
+        this.teamName = teamName;
+        this.teacher = teacher;
+        this.project = project;
+    }
+
     public Long getTeamId() {
         return teamId;
-    }
-
-    public Set<Student> getStudentSet() {
-        return studentSet;
-    }
-
-    public void setStudentSet(Set<Student> studentSet) {
-        this.studentSet = studentSet;
     }
 
     public void setTeamId(Long teamId) {
