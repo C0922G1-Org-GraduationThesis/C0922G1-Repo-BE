@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface ITeacherService {
     Page<ITeacherDto> getAllTeacher(String name, Pageable pageable);
 
-    Optional<ITeacherDto>findTeacherById(Long id);
+    Optional<ITeacherDto> findTeacherById(Long id);
 
     void deleteTeacherById(long id);
 }

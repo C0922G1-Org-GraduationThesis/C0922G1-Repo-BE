@@ -19,7 +19,6 @@ public interface ITeacherRepository extends JpaRepository<Teacher, Long> {
     /**
      * tên : phan văn hùng
      * nội dung: tạo phương thức hiển thị danh sách giáo viên với query thuần
-     *
      */
     @Query(value = "select `teacher`.teacher_id as teacherId,`teacher`.teacher_name as teacherName\n" +
             "            ,`teacher`.teacher_code as teacherCode, `teacher`.img as teacherImg,`teacher`.phone_number as teacherPhoneNumber\n" +
@@ -32,7 +31,6 @@ public interface ITeacherRepository extends JpaRepository<Teacher, Long> {
     /**
      * tên : phan văn hùng
      * nội dung: tạo phương thức lấy giáo viên theo id vơi query thuần
-     *
      */
     @Query(value = "select `teacher`.teacher_id as teacherId,`teacher`.teacher_name as teacherName\n" +
             "            ,`teacher`.teacher_code as teacherCode, `teacher`.img as teacherImg,`teacher`.phone_number as teacherPhoneNumber\n" +
@@ -45,7 +43,6 @@ public interface ITeacherRepository extends JpaRepository<Teacher, Long> {
     /**
      * tên : phan văn hùng
      * nội dung: tạo phương thức xóa giáo viên theo id vơi query thuần
-     *
      */
     @Transactional
     @Modifying

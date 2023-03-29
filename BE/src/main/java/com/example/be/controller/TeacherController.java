@@ -24,7 +24,6 @@ public class TeacherController {
      * nội dung: đổ list có phân trang và tìm kiếm theo tên
      * tham số truyền vào : tên tìm kiếm và pageable
      * return : Page teacher
-     *
      */
     @GetMapping("/list")
     public ResponseEntity<Page<ITeacherDto>> getAllTeacher(@RequestParam(defaultValue = "") String name,
@@ -41,7 +40,6 @@ public class TeacherController {
      * nội dung: tìm kiếm theo id
      * tham số truyền vào : id cần tìm kiếm
      * return : teacher
-     *
      */
     @GetMapping("/list/{id}")
     public ResponseEntity<ITeacherDto> getTeacherById(@PathVariable Long id) {
@@ -55,10 +53,9 @@ public class TeacherController {
      * nội dung: xóa 1 giáo viên theo id
      * tham số truyền vào : id cần xóa
      * return : trạng thái
-     *
      */
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteTeacherById(@PathVariable Long id) {
+    public ResponseEntity<ITeacherDto> deleteTeacherById(@PathVariable Long id) {
         Optional<ITeacherDto> teacher = teacherService.findTeacherById(id);
 
         if (!teacher.isPresent()) {
