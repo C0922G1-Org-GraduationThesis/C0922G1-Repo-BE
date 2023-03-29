@@ -8,18 +8,26 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 @Service
 public class AccountDetailService implements UserDetailsService {
 
-        @Autowired
-        IAccountRepository accountRepository;
-        @Override
-        @Transactional
-        public UserDetails loadUserByUsername(String email)  {
-            Account account = accountRepository.findAccountByEmail(email);
-            if(account==null){
-                throw new UsernameNotFoundException("User " + email + " was not found in the database");
-            }
-            return AccountDetails.build(account);
+    @Autowired
+    IAccountRepository accountRepository;
+
+    /**
+     * Created by: Phạm Tiến
+     * Date: 29/03/2023
+     * Function: loadUserByUsername(email)
+     * Return: AccountDetails.build(account)
+     */
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String email) {
+        Account account = accountRepository.findAccountByEmail(email);
+        if (account == null) {
+            throw new UsernameNotFoundException("User " + email + " was not found in the database");
         }
+        return AccountDetails.build(account);
     }
+}

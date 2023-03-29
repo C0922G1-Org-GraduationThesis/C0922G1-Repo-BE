@@ -15,6 +15,15 @@ import org.springframework.web.bind.annotation.*;
 public class StudentController {
     @Autowired
     private IStudentService studentService;
+
+    /**
+     * Created by: Phạm Tiến
+     * Date: 29/03/2023
+     * Function: findStudentById(email)
+     *
+     * @Return: new ResponseEntity<>(HttpStatus.BAD_REQUEST) if result is error,
+     * else new ResponseEntity<>(student, HttpStatus.OK)
+     */
     @RequestMapping(value = "/get-student/{email}", method = RequestMethod.GET)
     public ResponseEntity<Student> findStudentById(@PathVariable String email){
         Student student = studentService.findStudentByEmail(email);

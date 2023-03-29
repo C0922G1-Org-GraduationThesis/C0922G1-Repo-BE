@@ -16,6 +16,14 @@ public class TeacherController {
     @Autowired
     private ITeacherService teacherService;
 
+    /**
+     * Created by: Phạm Tiến
+     * Date: 29/03/2023
+     * Function: findStudentById(email)
+     *
+     * @Return: new ResponseEntity<>(HttpStatus.BAD_REQUEST) if result is error,
+     * else new ResponseEntity<>(student, HttpStatus.OK)
+     */
     @RequestMapping(value = "/get-teacher/{email}", method = RequestMethod.GET)
     public ResponseEntity<Teacher> findStudentById(@PathVariable String email) {
         Teacher teacher = teacherService.findTeacherByEmail(email);
@@ -24,6 +32,15 @@ public class TeacherController {
         }
         return new ResponseEntity<>(teacher, HttpStatus.OK);
     }
+
+    /**
+     * Created by: Phạm Tiến
+     * Date: 29/03/2023
+     * Function: updateTeacherRoleAdmin(teacher,bindingResult )
+     *
+     * @Return: new ResponseEntity<>(HttpStatus.BAD_REQUEST) if result is error,
+     * else new ResponseEntity<>(student, HttpStatus.OK)
+     */
 
     @RequestMapping(value = "/update-teacher", method = RequestMethod.PATCH)
     public ResponseEntity<Teacher> updateTeacherRoleAdmin(@RequestBody Teacher teacher, BindingResult bindingResult) {

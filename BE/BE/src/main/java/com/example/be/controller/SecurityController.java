@@ -34,6 +34,15 @@ public class SecurityController {
     private RoleService roleService;
     @Autowired
     private PasswordEncoder encoder;
+
+    /**
+     * Created by: Phạm Tiến
+     * Date: 29/03/2023
+     * Function: authenticateUser()
+     *
+     * @Param: loginRequest
+     * @Return: ResponseEntity.ok(new JwtResponse ( jwt, userDetails.getId (), userDetails.getUsername(), roles)
+     */
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
@@ -51,7 +60,7 @@ public class SecurityController {
                         userDetails.getId(),
                         userDetails.getUsername(),
                         roles
-                        )
+                )
         );
     }
 

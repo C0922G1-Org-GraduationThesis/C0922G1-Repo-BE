@@ -11,6 +11,12 @@ import java.util.List;
 public class RoleService implements IRoleService {
     @Autowired
     private IRoleRepository roleRepository;
+    /**
+     * Created by: Phạm Tiến
+     * Date: 29/03/2023
+     * Function: findAllRole()
+     * Return: List<Role>
+     */
     @Override
     public List<Role> findAllRole() {
         return roleRepository.finAllRole();

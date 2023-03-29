@@ -28,6 +28,13 @@ public class AccountDetails implements UserDetails {
         this.authorities = authorities;
     }
 
+    /**
+     * Created by: Phạm Tiến
+     * Date: 29/03/2023
+     * Function: build(account)
+     * Return: new AccountDetails()
+     */
+
     public static AccountDetails build(Account account) {
         List<GrantedAuthority> authorities = account.getAccountRoleList().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getRole().getRoleName()))
