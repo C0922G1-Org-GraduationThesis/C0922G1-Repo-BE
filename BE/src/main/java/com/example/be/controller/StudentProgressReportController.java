@@ -7,26 +7,23 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * SyVT
- *
- **/
+
 @RestController
 @RequestMapping("")
 public class StudentProgressReportController {
-    /**
-     * SyVT
-     *
-     **/
+
     @Autowired
     private StudentProgressReportService studentProgressReportService;
 
     /**
-     * SyVT
+     * Created by: SyVT,
+     * Date created : 29/03/2023
+     * Function : find Student ProgressReport By progressReportId
      *
-     **/
+     * @return HttpStatus.OK if result is not error or HttpStatus.NO_CONTENT if no content
+     */
     @GetMapping("studentProgressReport")
-    public ResponseEntity<StudentProgressReport> findProgressReportById(@RequestParam Long id) {
+    public ResponseEntity<StudentProgressReport> findStudentProgressReportById(@RequestParam Long id) {
         StudentProgressReport studentProgressReport = studentProgressReportService.findStudentProgressReportProjectId(id);
         if (studentProgressReport == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

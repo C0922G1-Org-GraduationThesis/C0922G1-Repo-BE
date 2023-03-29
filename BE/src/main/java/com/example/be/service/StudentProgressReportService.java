@@ -6,17 +6,19 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class StudentProgressReportService {
-    /**
-     * SyVT
-     */
+public class StudentProgressReportService implements IStudentProgressReportService {
+
     @Autowired
     private IStudentProgressReportRepository studentProgressReportRepository;
 
     /**
-     * SyVT
+     * Created by: SyVT,
+     * Date created : 29/03/2023
+     * Function : Find Student Progress Report By ProjectId
+     *
+     * @param projectId
      */
-    public com.example.be.dto.StudentProgressReport findStudentProgressReportProjectId(Long project_id) {
-        return studentProgressReportRepository.findStudentProgressReportProjectId(project_id);
+    public com.example.be.dto.StudentProgressReport findStudentProgressReportProjectId(Long projectId) {
+        return studentProgressReportRepository.findStudentProgressReportProjectId(projectId);
     }
 }

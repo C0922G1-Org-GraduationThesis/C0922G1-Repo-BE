@@ -19,17 +19,19 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("report")
 public class ProgressReportController {
-    /**
-     * SyVT
-     **/
+
     @Autowired
     private IProgressReportService progressReportService;
 
     /**
-     * SyVT
-     **/
+     * Created by: SyVT,
+     * Date created : 29/03/2023
+     * Function : Save ProgressReport
+     *
+     * @return HttpStatus.CREATED if result is not error or HttpStatus.NOT_ACCEPTABLE if no content
+     */
     @PostMapping("/")
-    public ResponseEntity<?> saveBus(@Validated @RequestBody ProgressReportDTO progressReportDTO, BindingResult bindingResult) {
+    public ResponseEntity<?> saveProgressReport(@Validated @RequestBody ProgressReportDTO progressReportDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.NOT_ACCEPTABLE);
         }
@@ -41,8 +43,12 @@ public class ProgressReportController {
     }
 
     /**
-     * SyVT
-     **/
+     * Created by: SyVT,
+     * Date created : 29/03/2023
+     * Function : find ProgressReport By progressReportId
+     *
+     * @return HttpStatus.OK if result is not error or HttpStatus.NO_CONTENT if no content
+     */
     @GetMapping("/{id}")
     public ResponseEntity<ProgressReport> findProgressReportById(@PathVariable Long id) {
         ProgressReport progressReport = progressReportService.findById(id);
@@ -53,8 +59,12 @@ public class ProgressReportController {
     }
 
     /**
-     * SyVT
-     **/
+     * Created by: SyVT,
+     * Date created : 29/03/2023
+     * Function : find ProgressReport By projectId and stageId
+     *
+     * @return HttpStatus.OK if result is not error or HttpStatus.NO_CONTENT if no content
+     */
     @GetMapping("/searchProjectIdAndStageId")
     public ResponseEntity<ProgressReport> findProgressReportByProjectIdAndStageId(@RequestParam("project_id") Long projectId, @RequestParam("stage_id") int stageId) {
         ProgressReport progressReport = progressReportService.findProgressReportByStageIdAndProjectId(projectId, stageId);

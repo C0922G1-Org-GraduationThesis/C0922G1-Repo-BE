@@ -4,9 +4,7 @@ package com.example.be.service;
 import com.example.be.model.Project;
 
 import java.util.List;
-/**
- * SyVT
- */
+
 public interface IProjectService {
     List<Project> findAll();
 

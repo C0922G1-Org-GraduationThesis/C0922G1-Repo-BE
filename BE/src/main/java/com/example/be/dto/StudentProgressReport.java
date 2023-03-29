@@ -1,9 +1,7 @@
 package com.example.be.dto;
 
 
-/**
- * SyVT
- */
+
 public class StudentProgressReport {
     private String progress_report_content;
     private String progress_report_file;

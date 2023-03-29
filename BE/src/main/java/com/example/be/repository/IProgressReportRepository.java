@@ -12,15 +12,22 @@ import java.util.List;
 @Transactional
 @Repository
 public interface IProgressReportRepository extends JpaRepository<ProgressReport, Long> {
+
     /**
-     * SyVT
-     **/
+     * Created by: SyVT,
+     * Date created : 29/03/2023
+     * Function : Find All Progress Report
+     *
+     */
     @Query(value = "SELECT pr.* FROM progress_report as pr", nativeQuery = true)
     List<ProgressReport> findAllProgressReport();
 
     /**
-     * SyVT
-     **/
+     * Created by: SyVT,
+     * Date created : 29/03/2023
+     * Function : Save ProgressReport
+     *
+     */
     @Modifying
     @Query(value = "INSERT INTO progress_report(progress_report_content, progress_report_file, project_id, stage_id,progress_report_date ) " +
             "VALUES (:progress_report_content, :progress_report_file, :project_id, :stage_id, :progress_report_date)",
@@ -30,14 +37,20 @@ public interface IProgressReportRepository extends JpaRepository<ProgressReport,
                             @Param("stage_id") int stage_id, @Param("progress_report_date") String progress_report_date);
 
     /**
-     * SyVT
-     **/
+     * Created by: SyVT,
+     * Date created : 29/03/2023
+     * Function : Find ProgressReport By Id
+     *
+     */
     @Query(value = "SELECT pr.* FROM progress_report as pr WHERE progress_report_id = :progress_report_id", nativeQuery = true)
     ProgressReport findProgressReportById(@Param("progress_report_id") Long progress_report_id);
 
     /**
-     * SyVT
-     **/
+     * Created by: SyVT,
+     * Date created : 29/03/2023
+     * Function : Find ProgressReport By StageId And ProjectId
+     *
+     */
     @Query(value = "SELECT pr.* FROM progress_report as pr WHERE stage_id = :project_id and project_id = :stage_id", nativeQuery = true)
     ProgressReport findProgressReportByStageIdAndProjectId(@Param("project_id") Long project_id, @Param("stage_id") int stage_id);
 

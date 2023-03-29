@@ -5,9 +5,7 @@ import com.example.be.model.Project;
 import com.example.be.model.Stage;
 
 import java.util.List;
-/**
- * SyVT
- */
+
 public interface IStageService {
     List<Stage> findAll();
 

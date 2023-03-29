@@ -1,9 +1,5 @@
 package com.example.be.dto;
-
-import com.example.be.model.Project;
-import com.example.be.model.Stage;
-
-import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
@@ -12,6 +8,7 @@ public class ProgressReportDTO {
     private Long progressReportId;
     @NotEmpty
     @NotBlank
+    @Max(value = 200)
     private String progressReportContent;
     @NotEmpty
     @NotBlank
