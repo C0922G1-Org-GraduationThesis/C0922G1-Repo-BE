@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -18,7 +19,11 @@ public class ProjectService implements IProjectService {
      * Create by: HauNN
      * Date create: 29/03/2023
      * Function: save project
+     *
+     * @return  project if result is not error else return null
+     * @Param: project
      */
+    @Transactional
     @Override
     public Project save(Project project) {
         Project projectOptional = this.projectRepository.findByName(project.getName()).orElse(null);
@@ -37,7 +42,10 @@ public class ProjectService implements IProjectService {
     /**
      * Create by: HauNN
      * Date create: 29/03/2023
-     * Function: find project by id
+     * Function: find by id project
+     *
+     * @return project if result is not error else return null
+     * @Param: id
      */
     @Override
     public Project findById(Long id) {
@@ -47,7 +55,10 @@ public class ProjectService implements IProjectService {
     /**
      * Create by: HauNN
      * Date create: 29/03/2023
-     * Function: find all project by name containing
+     * Function: find all by name project containing
+     *
+     * @return list page project if result is not error else return null
+     * @Param: searchName
      */
     @Override
     public Page<Project> findAllByNameContaining(String searchName, Pageable pageable) {

@@ -8,14 +8,20 @@ public interface IStudentService {
     /**
      * Create by: HauNN
      * Date create: 29/03/2023
-     * Function: find all student by student name containing or student code containing
+     * Function: find all student by name containing or code containing
+     *
+     * @return list page student if result is not error else return null
+     * @Param: searchStr, pageable
      */
     Page<Student> findAllByNameOrStudentCode(String searchStr, Pageable pageable);
 
     /**
      * Create by: HauNN
      * Date create: 29/03/2023
-     * Function: fill all Student by team id
+     * Function: find all student by team id
+     *
+     * @return list page student if result is not error else return null
+     * @Param: teamId, pageable
      */
     Page<Student> findAllByTeamId(Long teamId, Pageable pageable);
 }

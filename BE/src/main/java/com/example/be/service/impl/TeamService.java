@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TeamService implements ITeamService {
@@ -16,7 +17,10 @@ public class TeamService implements ITeamService {
     /**
      * Create by: HauNN
      * Date create: 29/03/2023
-     * Function: find all Team by name containing
+     * Function: find all team by name containing
+     *
+     * @return list page team if result is not error else return null
+     * @Param: teamName, pageable
      */
     @Override
     public Page<Team> findAll(String teamName, Pageable pageable) {
@@ -26,7 +30,10 @@ public class TeamService implements ITeamService {
     /**
      * Create by: HauNN
      * Date create: 29/03/2023
-     * Function: find all Team by id
+     * Function: find by team id
+     *
+     * @return team if result is not error else return null
+     * @Param: id
      */
     @Override
     public Team findById(Long id) {
@@ -36,8 +43,12 @@ public class TeamService implements ITeamService {
     /**
      * Create by: HauNN
      * Date create: 29/03/2023
-     * Function: save Team
+     * Function: save team
+     *
+     * @return team if result is not error else return null
+     * @Param: team
      */
+    @Transactional
     @Override
     public Team saveTeam(Team team) {
         Team teamOptional = this.teamRepository.findByName(team.getTeamName()).orElse(null);

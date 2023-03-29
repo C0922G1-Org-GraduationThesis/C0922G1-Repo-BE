@@ -10,6 +10,9 @@ public interface IProjectService {
      * Create by: HauNN
      * Date create: 29/03/2023
      * Function: save project
+     *
+     * @return  project if result is not error else return null
+     * @Param: project
      */
     Project save(Project project);
 
@@ -17,13 +20,19 @@ public interface IProjectService {
      * Create by: HauNN
      * Date create: 29/03/2023
      * Function: find by id project
+     *
+     * @return project if result is not error else return null
+     * @Param: id
      */
     Project findById(Long id);
 
     /**
      * Create by: HauNN
      * Date create: 29/03/2023
-     * Function: find by name containing project
+     * Function: find all by name project containing
+     *
+     * @return list page project if result is not error else return null
+     * @Param: searchName
      */
     Page<Project> findAllByNameContaining(String searchName, Pageable pageable);
 }

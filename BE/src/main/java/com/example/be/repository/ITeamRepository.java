@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -13,7 +14,10 @@ public interface ITeamRepository extends JpaRepository<Team, Long> {
     /**
      * Create by: HauNN
      * Date create: 29/03/2023
-     * Function: find all Team by name containing
+     * Function: find all team by name containing
+     *
+     * @return list page team if result is not error else return null
+     * @Param: teamName, pageable
      */
     @Query(value = "" +
             "SELECT " +
@@ -29,7 +33,10 @@ public interface ITeamRepository extends JpaRepository<Team, Long> {
     /**
      * Create by: HauNN
      * Date create: 29/03/2023
-     * Function: find all Team by id
+     * Function: find team by id
+     *
+     * @return  team if result is not error else return null
+     * @Param: id
      */
     @Query(value = "" +
             "SELECT " +
@@ -45,8 +52,12 @@ public interface ITeamRepository extends JpaRepository<Team, Long> {
     /**
      * Create by: HauNN
      * Date create: 29/03/2023
-     * Function: save Team
+     * Function: save team
+     *
+     * @return  team if result is not error else return null
+     * @Param: teamName, projectId, teacherId
      */
+    @Transactional
     @Query(value = "" +
             "INSERT INTO team " +
             "(team_name, project_id, teacher_id) " +
@@ -59,7 +70,10 @@ public interface ITeamRepository extends JpaRepository<Team, Long> {
     /**
      * Create by: HauNN
      * Date create: 29/03/2023
-     * Function: find all Team by name
+     * Function: find all team by name
+     *
+     * @return team if result is not error else return null
+     * @Param: teamName
      */
     @Query(value = "" +
             "SELECT " +

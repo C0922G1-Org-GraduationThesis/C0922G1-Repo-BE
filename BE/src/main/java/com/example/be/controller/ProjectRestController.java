@@ -32,6 +32,7 @@ public class ProjectRestController {
      * Function: find all project by name containing
      *
      * @return HttpStatus.OK if result is not error else return HttpStatus.NO_CONTENT
+     * @Param: searchName, size, page
      */
 
     @GetMapping("/")
@@ -53,6 +54,7 @@ public class ProjectRestController {
      * Function: save project
      *
      * @return HttpStatus.OK if result is not error else return HttpStatus.EXPECTATION_FAILED
+     * @Param: projectDTO, bindingResult
      */
     @PostMapping("/save")
     public ResponseEntity<?> saveProject(@Validated @RequestBody ProjectDTO projectDTO,
@@ -86,6 +88,7 @@ public class ProjectRestController {
      * Function: find project by id
      *
      * @return HttpStatus.OK if result is not error else return HttpStatus.EXPECTATION_FAILED
+     * @Param: id
      */
     @GetMapping("/{id}")
     public ResponseEntity<Project> findById(@PathVariable Long id) {

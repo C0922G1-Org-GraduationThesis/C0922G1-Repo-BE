@@ -23,6 +23,7 @@ public class StudentRestController {
      * Function: find all student by name containing or code containing
      *
      * @return HttpStatus.OK if result is not error else return HttpStatus.NO_CONTENT
+     * @Param: searchStr, size, page
      */
     @GetMapping("/")
     public ResponseEntity<Page<Student>> findAllByNameOrStudentCode
@@ -44,6 +45,7 @@ public class StudentRestController {
      * Function: find all student by team id
      *
      * @return HttpStatus.OK if result is not error else return HttpStatus.NO_CONTENT
+     * @Param: teamId, size, page
      */
     @GetMapping("/{teamId}")
     public ResponseEntity<Page<Student>> findAllByTeamId

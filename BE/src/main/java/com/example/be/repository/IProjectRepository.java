@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -14,7 +15,11 @@ public interface IProjectRepository extends JpaRepository<Project, Long> {
      * Create by: HauNN
      * Date create: 29/03/2023
      * Function: save project
+     *
+     * @return project if result is not error else return null
+     * @Param: name, content, description, img
      */
+    @Transactional
     @Query(value = "" +
             "INSERT INTO project " +
             "(name, content, description, project_status, img)" +
@@ -29,6 +34,9 @@ public interface IProjectRepository extends JpaRepository<Project, Long> {
      * Create by: HauNN
      * Date create: 29/03/2023
      * Function: find by id project
+     *
+     * @return project if result is not error else return null
+     * @Param: id
      */
     @Query(value = "" +
             "SELECT " +
@@ -46,6 +54,9 @@ public interface IProjectRepository extends JpaRepository<Project, Long> {
      * Create by: HauNN
      * Date create: 29/03/2023
      * Function: find by name project
+     *
+     * @return project if result is not error else return null
+     * @Param: name
      */
     @Query(value = "" +
             "SELECT " +
@@ -63,6 +74,9 @@ public interface IProjectRepository extends JpaRepository<Project, Long> {
      * Create by: HauNN
      * Date create: 29/03/2023
      * Function: find by name containing project
+     *
+     * @return list page project if result is not error else return null
+     * @Param: project, pageable
      */
     @Query(value = "" +
             "SELECT " +

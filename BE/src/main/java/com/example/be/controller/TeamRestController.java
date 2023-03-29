@@ -31,6 +31,7 @@ public class TeamRestController {
      * Function: find all team by name containing
      *
      * @return HttpStatus.OK if result is not error else return HttpStatus.NO_CONTENT
+     * @Param: teamName, size, page
      */
     @GetMapping("/")
     public ResponseEntity<Page<Team>> findAll(@RequestParam(required = false, defaultValue = "") String teamName,
@@ -51,6 +52,7 @@ public class TeamRestController {
      * Function: save team
      *
      * @return HttpStatus.OK if result is not error else return HttpStatus.EXPECTATION_FAILED
+     * @Param: teamDTO, bindingResult
      */
     @PostMapping("/save")
     public ResponseEntity<?> saveTeam(@Validated @RequestBody TeamDTO teamDTO, BindingResult bindingResult) {
@@ -81,6 +83,7 @@ public class TeamRestController {
      * Function: find team by id
      *
      * @return HttpStatus.OK if result is not error else return HttpStatus.NO_CONTENT
+     * @Param: id
      */
     @GetMapping("/{id}")
     public ResponseEntity<Team> findById(@PathVariable Long id) {
