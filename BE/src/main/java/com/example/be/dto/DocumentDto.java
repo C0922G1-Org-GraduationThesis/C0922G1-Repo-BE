@@ -1,8 +1,13 @@
 package com.example.be.dto;
 
+import javax.validation.constraints.NotBlank;
+
 public class DocumentDto {
+
     private Long documentId;
+    @NotBlank(message = "Không được để trống, nhập tên tài liệu vào. ")
     private String documentName;
+    @NotBlank(message = "Không được để trống, nhập mô tả cho tài liệu này vào. ")
     private String documentDescribe;
     private String documentFile;
 

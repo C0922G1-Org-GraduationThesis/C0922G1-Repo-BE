@@ -1,9 +1,13 @@
 package com.example.be.dto;
 
+import javax.validation.constraints.NotBlank;
+
 public class NotificationTeacherDto {
 
     private Long notificationTeacherId;
+    @NotBlank(message = "Không được để trống, nhập chủ đề thông báo vào. ")
     private String notificationTeacherName;
+    @NotBlank(message = "Không được để trống, nhập nội dung thông báo vào. ")
     private String notificationTeacherContent;
 
     public NotificationTeacherDto() {
