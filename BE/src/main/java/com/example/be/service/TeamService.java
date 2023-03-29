@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * SyVT
- */
+
 @Service
 public class TeamService implements ITeamService {
     @Autowired

@@ -8,16 +8,19 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.List;
 
-/**
- * SyVT
- */
+
 @Transactional
 @Repository
 public interface IProgressReportRepository extends JpaRepository<ProgressReport, Long> {
-
+    /**
+     * SyVT
+     **/
     @Query(value = "SELECT pr.* FROM progress_report as pr", nativeQuery = true)
     List<ProgressReport> findAllProgressReport();
 
+    /**
+     * SyVT
+     **/
     @Modifying
     @Query(value = "INSERT INTO progress_report(progress_report_content, progress_report_file, project_id, stage_id,progress_report_date ) " +
             "VALUES (:progress_report_content, :progress_report_file, :project_id, :stage_id, :progress_report_date)",
@@ -26,10 +29,15 @@ public interface IProgressReportRepository extends JpaRepository<ProgressReport,
                             @Param("project_id") Long project_id,
                             @Param("stage_id") int stage_id, @Param("progress_report_date") String progress_report_date);
 
+    /**
+     * SyVT
+     **/
     @Query(value = "SELECT pr.* FROM progress_report as pr WHERE progress_report_id = :progress_report_id", nativeQuery = true)
     ProgressReport findProgressReportById(@Param("progress_report_id") Long progress_report_id);
 
-
+    /**
+     * SyVT
+     **/
     @Query(value = "SELECT pr.* FROM progress_report as pr WHERE stage_id = :project_id and project_id = :stage_id", nativeQuery = true)
     ProgressReport findProgressReportByStageIdAndProjectId(@Param("project_id") Long project_id, @Param("stage_id") int stage_id);
 

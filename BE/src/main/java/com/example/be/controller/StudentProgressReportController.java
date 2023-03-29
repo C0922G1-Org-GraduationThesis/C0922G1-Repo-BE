@@ -9,13 +9,22 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * SyVT
- */
+ *
+ **/
 @RestController
 @RequestMapping("")
 public class StudentProgressReportController {
+    /**
+     * SyVT
+     *
+     **/
     @Autowired
     private StudentProgressReportService studentProgressReportService;
 
+    /**
+     * SyVT
+     *
+     **/
     @GetMapping("studentProgressReport")
     public ResponseEntity<StudentProgressReport> findProgressReportById(@RequestParam Long id) {
         StudentProgressReport studentProgressReport = studentProgressReportService.findStudentProgressReportProjectId(id);
