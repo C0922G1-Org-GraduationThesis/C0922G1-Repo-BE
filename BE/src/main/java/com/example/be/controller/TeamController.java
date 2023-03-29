@@ -24,7 +24,7 @@ public class TeamController {
      * Date create: 29/03/2023
      * Function: tạo api get all and paging information teacher
      * @param: pageable
-     * @return HttpStatus.NOT_FOUND if result is empty or HttpStatus.OK if result is not error.
+     * @return HttpStatus.NOT_FOUND if result is empty or HttpStatus.OK if in the data there are record teachers.
      */
     @GetMapping("/instructor")
     public ResponseEntity<Page<TeacherDto>> getAllInstructor(@PageableDefault(size = 5) Pageable pageable) {
@@ -41,7 +41,7 @@ public class TeamController {
      * Date create: 29/03/2023
      * Function: create api find team by id
      * @param: teamId
-     * @return HttpStatus.NOT_FOUND if result is null or HttpStatus.OK if result is not error.
+     * @return HttpStatus.NOT_FOUND if result is null or HttpStatus.OK if there is a team with the teamId to look for.
      */
     @GetMapping("/team/{teamId}")
     public ResponseEntity<Team> findTeamById(@PathVariable Long teamId) {
