@@ -11,16 +11,25 @@ public class Team {
     private Long teamId;
     @Column(columnDefinition = "varchar(50)", nullable = false, unique = true)
     private String teamName;
+    @Column( nullable = false)
+    private int memberOfTeam;
     @OneToOne
     @JoinColumn(name = "teacher_id", referencedColumnName = "teacher_id")
     private Teacher teacher;
-    @OneToOne
-    @JoinColumn(name = "project_id", referencedColumnName = "project_id")
+    @OneToOne(mappedBy = "team")
     private Project project;
     @OneToMany(mappedBy = "team")
     private Set<Student> studentSet;
 
     public Team() {
+    }
+
+    public int getMemberOfTeam() {
+        return memberOfTeam;
+    }
+
+    public void setMemberOfTeam(int memberOfTeam) {
+        this.memberOfTeam = memberOfTeam;
     }
 
     public Long getTeamId() {

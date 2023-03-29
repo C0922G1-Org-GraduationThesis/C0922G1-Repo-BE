@@ -24,10 +24,21 @@ public class Project {
     @JsonIgnore
     @OneToMany(mappedBy = "project")
     private Set<ProgressReport> progressReportSet;
-    @OneToOne(mappedBy = "project")
+    @OneToOne
+    @JoinColumn(name = "team_id", referencedColumnName = "team_id")
     private Team team;
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "project")
+    private Set<ProgressReview> progressReviewSet;
     public Project() {
+    }
+
+    public Set<ProgressReview> getProgressReviewSet() {
+        return progressReviewSet;
+    }
+
+    public void setProgressReviewSet(Set<ProgressReview> progressReviewSet) {
+        this.progressReviewSet = progressReviewSet;
     }
 
     public Team getTeam() {

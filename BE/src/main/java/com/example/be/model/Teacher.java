@@ -48,8 +48,19 @@ public class Teacher {
     @OneToMany(mappedBy = "teacher")
     @JsonIgnore
     private Set<Document> documentSet;
+    @OneToMany(mappedBy = "teacher")
+    @JsonIgnore
+    private Set<ProgressReview>progressReviews;
 
     public Teacher() {
+    }
+
+    public Set<ProgressReview> getProgressReviews() {
+        return progressReviews;
+    }
+
+    public void setProgressReviews(Set<ProgressReview> progressReviews) {
+        this.progressReviews = progressReviews;
     }
 
     public boolean isFlagDelete() {
