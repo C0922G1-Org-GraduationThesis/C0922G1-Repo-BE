@@ -12,22 +12,43 @@ public class Project {
     @Column(name = "project_id")
     private Long projectId;
     @Column(columnDefinition = "varchar(255)", nullable = false, unique = true)
-    private String name;
+    private String projectName;
     @Column(columnDefinition = "text", nullable = false)
-    private String content;
+    private String projectContent;
     @Column(columnDefinition = "text", nullable = false)
-    private String img;
+    private String projectImg;
     @Column(columnDefinition = "text", nullable = false)
-    private String description;
+    private String projectDescription;
     @Column(columnDefinition = "bit(1)")
     private boolean projectStatus;
+    @Column(columnDefinition = "bit(1)")
+    private boolean flagDelete;
     @JsonIgnore
     @OneToMany(mappedBy = "project")
     private Set<ProgressReport> progressReportSet;
     @OneToOne(mappedBy = "project")
     private Team team;
+    @JsonIgnore
+    @OneToMany(mappedBy = "project")
+    private Set<ProgressReview> progressReviews;
 
     public Project() {
+    }
+
+    public Set<ProgressReview> getProgressReviews() {
+        return progressReviews;
+    }
+
+    public void setProgressReviews(Set<ProgressReview> progressReviews) {
+        this.progressReviews = progressReviews;
+    }
+
+    public boolean isFlagDelete() {
+        return flagDelete;
+    }
+
+    public void setFlagDelete(boolean flagDelete) {
+        this.flagDelete = flagDelete;
     }
 
     public Team getTeam() {
@@ -62,35 +83,35 @@ public class Project {
         this.projectId = projectId;
     }
 
-    public String getName() {
-        return name;
+    public String getProjectName() {
+        return projectName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProjectName(String name) {
+        this.projectName = name;
     }
 
-    public String getContent() {
-        return content;
+    public String getProjectContent() {
+        return projectContent;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setProjectContent(String content) {
+        this.projectContent = content;
     }
 
-    public String getDescription() {
-        return description;
+    public String getProjectDescription() {
+        return projectDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setProjectDescription(String description) {
+        this.projectDescription = description;
     }
 
-    public String getImg() {
-        return img;
+    public String getProjectImg() {
+        return projectImg;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setProjectImg(String img) {
+        this.projectImg = img;
     }
 }

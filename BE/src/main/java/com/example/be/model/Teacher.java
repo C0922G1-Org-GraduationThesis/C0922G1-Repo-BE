@@ -16,17 +16,17 @@ public class Teacher {
     @Column(columnDefinition = "varchar(50)", nullable = false)
     private String teacherName;
     @Column(columnDefinition = "varchar(50)", nullable = false)
-    private String dateOfBirth;
+    private String teacherDateOfBirth;
+    @Column(columnDefinition = "varchar(255)", nullable = false, unique = true)
+    private String teacherEmail;
     @Column(columnDefinition = "varchar(50)", nullable = false, unique = true)
-    private String email;
-    @Column(columnDefinition = "varchar(50)", nullable = false, unique = true)
-    private String phoneNumber;
+    private String teacherPhoneNumber;
     @Column(columnDefinition = "bit(1)", nullable = false)
     private boolean teacherGender;
     @Column(columnDefinition = "varchar(50)", nullable = false)
     private String teacherAddress;
     @Column(columnDefinition = "text", nullable = false)
-    private String img;
+    private String teacherImg;
     @Column(columnDefinition = "bit(1)")
     private boolean flagDelete;
     @ManyToOne
@@ -43,6 +43,10 @@ public class Teacher {
     @OneToMany(mappedBy = "teacher")
     @JsonIgnore
     private Set<NotificationTeacher> notificationTeacherSet;
+
+    @OneToMany(mappedBy = "teacher")
+    @JsonIgnore
+    private Set<ProgressReview> progressReviews;
     @OneToOne(mappedBy = "teacher")
     private Clazz clazz;
     @OneToMany(mappedBy = "teacher")
@@ -52,38 +56,12 @@ public class Teacher {
     public Teacher() {
     }
 
-    public boolean isFlagDelete() {
-        return flagDelete;
+    public Set<ProgressReview> getProgressReviews() {
+        return progressReviews;
     }
 
-    public void setFlagDelete(boolean flagDelete) {
-        this.flagDelete = flagDelete;
-    }
-
-
-    public Clazz getClazz() {
-        return clazz;
-    }
-
-    public void setClazz(Clazz clazz) {
-        this.clazz = clazz;
-    }
-
-    public Set<NotificationTeacher> getNotificationTeacherSet() {
-        return notificationTeacherSet;
-    }
-
-    public void setNotificationTeacherSet(Set<NotificationTeacher> notificationTeacherSet) {
-        this.notificationTeacherSet = notificationTeacherSet;
-    }
-
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setProgressReviews(Set<ProgressReview> progressReviews) {
+        this.progressReviews = progressReviews;
     }
 
     public Long getTeacherId() {
@@ -110,28 +88,28 @@ public class Teacher {
         this.teacherName = teacherName;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
+    public String getTeacherDateOfBirth() {
+        return teacherDateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setTeacherDateOfBirth(String teacherDateOfBirth) {
+        this.teacherDateOfBirth = teacherDateOfBirth;
     }
 
-    public String getEmail() {
-        return email;
+    public String getTeacherEmail() {
+        return teacherEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setTeacherEmail(String teacherEmail) {
+        this.teacherEmail = teacherEmail;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getTeacherPhoneNumber() {
+        return teacherPhoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setTeacherPhoneNumber(String teacherPhoneNumber) {
+        this.teacherPhoneNumber = teacherPhoneNumber;
     }
 
     public boolean isTeacherGender() {
@@ -150,12 +128,20 @@ public class Teacher {
         this.teacherAddress = teacherAddress;
     }
 
-    public String getImg() {
-        return img;
+    public String getTeacherImg() {
+        return teacherImg;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setTeacherImg(String teacherImg) {
+        this.teacherImg = teacherImg;
+    }
+
+    public boolean isFlagDelete() {
+        return flagDelete;
+    }
+
+    public void setFlagDelete(boolean flagDelete) {
+        this.flagDelete = flagDelete;
     }
 
     public Faculty getFaculty() {
@@ -180,6 +166,30 @@ public class Teacher {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public Set<NotificationTeacher> getNotificationTeacherSet() {
+        return notificationTeacherSet;
+    }
+
+    public void setNotificationTeacherSet(Set<NotificationTeacher> notificationTeacherSet) {
+        this.notificationTeacherSet = notificationTeacherSet;
+    }
+
+    public Clazz getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(Clazz clazz) {
+        this.clazz = clazz;
     }
 
     public Set<Document> getDocumentSet() {

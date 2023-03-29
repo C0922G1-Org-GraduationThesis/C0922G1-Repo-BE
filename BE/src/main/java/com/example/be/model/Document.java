@@ -7,14 +7,27 @@ public class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long documentId;
+    @Column(columnDefinition = "text")
     private String documentName;
+    @Column(columnDefinition = "text")
     private String documentDescribe;
-    private boolean flag = true;
+    @Column(columnDefinition = "text")
+    private String documentFile;
+    @Column(columnDefinition = "bit(1)")
+    private boolean flagDelete;
     @ManyToOne
     @JoinColumn(name = "teacher_id",referencedColumnName = "teacher_id")
     private Teacher teacher;
 
     public Document() {
+    }
+
+    public String getDocumentFile() {
+        return documentFile;
+    }
+
+    public void setDocumentFile(String documentFile) {
+        this.documentFile = documentFile;
     }
 
     public Long getDocumentId() {
@@ -41,12 +54,12 @@ public class Document {
         this.documentDescribe = documentDescribe;
     }
 
-    public boolean isFlag() {
-        return flag;
+    public boolean isFlagDelete() {
+        return flagDelete;
     }
 
-    public void setFlag(boolean flag) {
-        this.flag = flag;
+    public void setFlagDelete(boolean flagDelete) {
+        this.flagDelete = flagDelete;
     }
 
     public Teacher getTeacher() {

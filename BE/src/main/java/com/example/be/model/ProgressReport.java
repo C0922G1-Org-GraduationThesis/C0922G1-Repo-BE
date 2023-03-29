@@ -8,14 +8,13 @@ public class ProgressReport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "progress_report_id")
     private Long progressReportId;
-    @Column(columnDefinition = "varchar(50)", nullable = false)
-    private String progressReportName;
     @Column(columnDefinition = "text", nullable = false)
     private String progressReportContent;
+    @Column(columnDefinition = "dateTime", nullable = false)
+    private String progressReportTime;
     @Column(columnDefinition = "text", nullable = false)
     private String progressReportFile;
-    @Column(columnDefinition = "int", nullable = false)
-    private int progressReportPercent;
+
     @ManyToOne
     @JoinColumn(name = "stage_id" , referencedColumnName = "stage_id")
     private Stage stage;
@@ -34,12 +33,12 @@ public class ProgressReport {
         this.progressReportId = progressReportId;
     }
 
-    public String getProgressReportName() {
-        return progressReportName;
+    public String getProgressReportTime() {
+        return progressReportTime;
     }
 
-    public void setProgressReportName(String progressReportName) {
-        this.progressReportName = progressReportName;
+    public void setProgressReportTime(String progressReportTime) {
+        this.progressReportTime = progressReportTime;
     }
 
     public String getProgressReportContent() {
@@ -58,13 +57,6 @@ public class ProgressReport {
         this.progressReportFile = progressReportFile;
     }
 
-    public int getProgressReportPercent() {
-        return progressReportPercent;
-    }
-
-    public void setProgressReportPercent(int progressReportPercent) {
-        this.progressReportPercent = progressReportPercent;
-    }
 
     public Stage getStage() {
         return stage;

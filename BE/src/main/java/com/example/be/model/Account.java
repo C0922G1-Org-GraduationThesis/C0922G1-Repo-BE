@@ -14,7 +14,7 @@ public class Account {
     private Long accountId;
     @Column(columnDefinition = "varchar(50)", nullable = false)
     private String password = "12345678";
-    @Column(columnDefinition = "varchar(50)", unique = true, nullable = false)
+    @Column(columnDefinition = "varchar(255)", unique = true, nullable = false)
     private String email;
     @OneToMany(mappedBy = "account")
     @JsonIgnore
@@ -23,12 +23,11 @@ public class Account {
     private Teacher teacher;
     @OneToOne(mappedBy = "account")
     private Student student;
-    @OneToOne(mappedBy = "account")
-    private Admin admin;
 
     public Teacher getTeacher() {
         return teacher;
     }
+
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;

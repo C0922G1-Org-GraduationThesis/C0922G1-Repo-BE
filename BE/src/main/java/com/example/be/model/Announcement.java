@@ -15,6 +15,8 @@ public class Announcement {
     private String announcementName;
     @Column(columnDefinition = "text", nullable = false)
     private String announcementContent;
+    @Column(columnDefinition = "text", nullable = false)
+    private String announcementTime;
     @OneToMany(mappedBy = "announcement")
     @JsonIgnore
     private Set<StudentAnnouncement> studentAnnouncementSet;
@@ -22,12 +24,21 @@ public class Announcement {
     public Announcement() {
     }
 
+
     public Set<StudentAnnouncement> getStudentAnnouncementSet() {
         return studentAnnouncementSet;
     }
 
     public void setStudentAnnouncementSet(Set<StudentAnnouncement> studentAnnouncementSet) {
         this.studentAnnouncementSet = studentAnnouncementSet;
+    }
+
+    public String getAnnouncementTime() {
+        return announcementTime;
+    }
+
+    public void setAnnouncementTime(String announcementTime) {
+        this.announcementTime = announcementTime;
     }
 
     public String getAnnouncementContent() {

@@ -9,7 +9,7 @@ public class NotificationTeacher {
     @Column(name = "notification_teacher_id")
     private Long notificationTeacherId;
     @Column(columnDefinition = "varchar(50)")
-    private String notificationTeacherName;
+    private String notificationTeacherTopic;
     @Column(columnDefinition = "varchar(15)")
     private String notificationTeacherTime;
     @Column(columnDefinition = "text")
@@ -29,12 +29,12 @@ public class NotificationTeacher {
         this.notificationTeacherId = notificationTeacherId;
     }
 
-    public String getNotificationTeacherName() {
-        return notificationTeacherName;
+    public String getNotificationTeacherTopic() {
+        return notificationTeacherTopic;
     }
 
-    public void setNotificationTeacherName(String notificationTeacherName) {
-        this.notificationTeacherName = notificationTeacherName;
+    public void setNotificationTeacherTopic(String notificationTeacherName) {
+        this.notificationTeacherTopic = notificationTeacherName;
     }
 
     public String getNotificationTeacherTime() {

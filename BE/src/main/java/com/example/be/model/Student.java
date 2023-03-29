@@ -16,19 +16,21 @@ public class Student {
     @Column(columnDefinition = "varchar(50)", nullable = false, unique = true)
     private String studentCode;
     @Column(columnDefinition = "varchar(50)", nullable = false)
-    private String dateOfBirth;
+    private String studentDateOfBirth;
     @Column(columnDefinition = "varchar(50)", nullable = false, unique = true)
-    private String email;
+    private String studentEmail;
     @Column(columnDefinition = "varchar(50)", nullable = false, unique = true)
-    private String phoneNumber;
+    private String studentPhoneNumber;
     @Column(columnDefinition = "bit(1)", nullable = false)
     private boolean studentGender;
     @Column(columnDefinition = "varchar(50)", nullable = false)
     private String studentAddress;
     @Column(columnDefinition = "text", nullable = false)
-    private String img;
+    private String studentImg;
     @Column(columnDefinition = "bit(1)")
     private boolean flagDelete;
+    @Column(columnDefinition = "bit(1)")
+    private boolean flagLeader;
     @OneToOne
     @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     private Account account;
@@ -44,6 +46,14 @@ public class Student {
     @OneToMany(mappedBy = "student")
     @JsonIgnore
     private Set<QuestionAndAnswer> questionAndAnswerSet;
+
+    public boolean isFlagLeader() {
+        return flagLeader;
+    }
+
+    public void setFlagLeader(boolean flagLeader) {
+        this.flagLeader = flagLeader;
+    }
 
     public Student() {
     }
@@ -88,28 +98,28 @@ public class Student {
         this.studentCode = studentCode;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
+    public String getStudentDateOfBirth() {
+        return studentDateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setStudentDateOfBirth(String dateOfBirth) {
+        this.studentDateOfBirth = dateOfBirth;
     }
 
-    public String getEmail() {
-        return email;
+    public String getStudentEmail() {
+        return studentEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setStudentEmail(String email) {
+        this.studentEmail = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getStudentPhoneNumber() {
+        return studentPhoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setStudentPhoneNumber(String phoneNumber) {
+        this.studentPhoneNumber = phoneNumber;
     }
 
     public boolean isStudentGender() {
@@ -128,12 +138,12 @@ public class Student {
         this.studentAddress = studentAddress;
     }
 
-    public String getImg() {
-        return img;
+    public String getStudentImg() {
+        return studentImg;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setStudentImg(String img) {
+        this.studentImg = img;
     }
 
     public boolean isFlagDelete() {
