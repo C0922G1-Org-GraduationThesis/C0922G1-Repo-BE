@@ -11,7 +11,7 @@ public class Team {
     private Long teamId;
     @Column(columnDefinition = "varchar(50)", nullable = false, unique = true)
     private String teamName;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "teacher_id", referencedColumnName = "teacher_id")
     private Teacher teacher;
     @OneToOne
