@@ -13,13 +13,10 @@ import java.util.List;
 
 @Component
 public class StudentService implements IStudentService {
-
-    @Autowired
-    private JavaMailSender emailSender;
-
     @Autowired
     private IStudentRepository iStudentRepository;
-
+    @Autowired
+    private JavaMailSender emailSender;
     @Autowired
     private IProjectRepository iProjectRepository;
 
@@ -59,19 +56,11 @@ public class StudentService implements IStudentService {
      * Date create: 29/03/2023
      */
     public void sendSimpleMessage(
-            List<StudentDto> mailList, String subject, String text,long projectId) {
+            List<StudentDto> mailList, String subject, String text, long projectId) {
         String[] arrayEmail = new String[mailList.size()];
         for (int i = 0; i < mailList.size(); i++) {
             arrayEmail[i] = mailList.get(i).getEmail();
         }
-//        SimpleMailMessage message = new SimpleMailMessage();
-//        message.setFrom("nuongho.160304@gmail.com");
-//        message.setTo(arrayEmail);
-//        message.setSubject(subject);
-//        message.setText(text);
-//        emailSender.send(message);
-
-        // Lấy tên của đề tài
         String projectTitle = getProjectTitle(projectId);
         String teamName = getTeam(projectId);
         if (projectTitle != null) {
@@ -79,14 +68,11 @@ public class StudentService implements IStudentService {
             message.setFrom("nuongho.160304@gmail.com");
             message.setTo(arrayEmail);
             message.setSubject(subject);
-//            message.setText(text);
-//            emailSender.send(message);
             message.setText("Xin chào các thành viên " + teamName
-                    + "\nĐề tài " + projectTitle +"của các bạn"
+                    + "\nĐề tài " + projectTitle + "của các bạn"
                     + "\nquá ok được duyệt.");
             // ...
             emailSender.send(message);
-
         }
     }
 
@@ -101,15 +87,6 @@ public class StudentService implements IStudentService {
             arrayEmail[i] = mailList.get(i).getEmail();
         }
 
-
-//        SimpleMailMessage message = new SimpleMailMessage();
-//        message.setFrom("nuongho.160304@gmail.com");
-//        message.setTo(arrayEmail);
-//        message.setSubject(subject);
-//        message.setText(text);
-//        emailSender.send(message);
-
-        // Lấy team, tên của đề tài.
         String projectTitle = getProjectTitle(projectId);
         String teamName = getTeam(projectId);
         if (projectTitle != null) {
@@ -117,8 +94,6 @@ public class StudentService implements IStudentService {
             message.setFrom("nuongho.160304@gmail.com");
             message.setTo(arrayEmail);
             message.setSubject(subject);
-//            message.setText(text);
-//            emailSender.send(message);
             message.setText("Xin chào các thành viên " + teamName
                     + "\nĐề tài " + projectTitle +"của các bạn"
                     + "\nbị từ chối duyệt. ");
@@ -127,11 +102,6 @@ public class StudentService implements IStudentService {
 
         }
     }
-
-    /**
-     * Created by: NuongHT
-     * Date create: 29/03/2023
-     */
 
     @Override
     public List<StudentDto> getInfomation(Long teamId) {

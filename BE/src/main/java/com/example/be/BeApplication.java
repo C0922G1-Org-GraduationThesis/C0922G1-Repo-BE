@@ -32,4 +32,5 @@ public class BeApplication {
 
         return mailSender;
     }
+
 }

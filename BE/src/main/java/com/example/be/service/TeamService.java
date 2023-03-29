@@ -7,24 +7,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class TeamService implements ITeamService {
+public class TeamService implements ITeamService{
     @Autowired
-    private ITeamRepository iProjectRepository;
-
-//    @Override
-//    public List<Team> findAllPro() {
-//        return iProjectRepository.findAllPro();
-//    }
-
-
+    private ITeamRepository iTeamRepository;
     @Override
     public Page<Team> findPagePro(Pageable pageable) {
-        return iProjectRepository.findPagePro(pageable);
+        return iTeamRepository.findPagePro(pageable);
     }
-
-
-
 }

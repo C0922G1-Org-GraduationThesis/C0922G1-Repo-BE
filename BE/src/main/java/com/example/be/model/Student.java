@@ -30,14 +30,13 @@ public class Student {
     @Column(columnDefinition = "bit(1)")
     private boolean flagDelete;
     @OneToOne
-    @JoinColumn(name = "id_account", referencedColumnName = "account_id")
+    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     private Account account;
     @ManyToOne
-    @JoinColumn(name = "id_clazz", referencedColumnName = "clazz_id")
+    @JoinColumn(name = "clazz_id", referencedColumnName = "clazz_id")
     private Clazz clazz;
     @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "id_team", referencedColumnName = "team_id")
+    @JoinColumn(name = "team_id", referencedColumnName = "team_id")
     private Team team;
     @OneToMany(mappedBy = "student")
     @JsonIgnore
