@@ -8,6 +8,7 @@ public class Document {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long documentId;
         private String documentName;
+        @Column(columnDefinition = "text")
     private String documentDescribe;
     private boolean flag = true;
     private String documentFile;

@@ -1,9 +1,16 @@
 package com.example.be.dto;
 
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
 import javax.validation.constraints.NotBlank;
 
-public class DocumentDto {
+public class DocumentDto implements Validator {
 
+    /**
+     * Create by: TuanNDN
+     * Date created: 29/03/2023
+     */
     private Long documentId;
     @NotBlank(message = "Không được để trống, nhập tên tài liệu vào. ")
     private String documentName;
@@ -50,5 +57,15 @@ public class DocumentDto {
 
     public void setDocumentFile(String documentFile) {
         this.documentFile = documentFile;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
     }
 }

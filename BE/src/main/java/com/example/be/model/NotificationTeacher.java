@@ -1,5 +1,7 @@
 package com.example.be.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -16,6 +18,7 @@ public class NotificationTeacher {
     @Column(columnDefinition = "text")
     private String notificationTeacherContent;
 
+
     @ManyToOne
     @JoinColumn(name = "teacher_id",referencedColumnName = "teacher_id")
     private Teacher teacher;
@@ -29,6 +32,11 @@ public class NotificationTeacher {
 
     public void setNotificationTeacherId(Long notificationTeacherId) {
         this.notificationTeacherId = notificationTeacherId;
+    }
+
+    public NotificationTeacher(String notificationTeacherName, String notificationTeacherContent) {
+        this.notificationTeacherName = notificationTeacherName;
+        this.notificationTeacherContent = notificationTeacherContent;
     }
 
     public String getNotificationTeacherName() {

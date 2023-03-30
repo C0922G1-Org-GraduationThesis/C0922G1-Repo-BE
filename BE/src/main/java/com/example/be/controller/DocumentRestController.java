@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/document")
@@ -21,6 +23,14 @@ public class DocumentRestController {
     @Autowired
     private IDocumentService documentService;
 
+    /**
+     * Create by: TuanNDN
+     * Date created: 29/03/2023
+     * Function: show List DocumentDto
+     * @param keySearch1
+     * @param pageable
+     * @return HttpStatus.BAD_REQUEST if result is error or HttpStatus. OK if result is not error
+     */
     @GetMapping("")
     public ResponseEntity<Page<IDocumentDto>> getAllAndSearchDocument(
             @RequestParam(defaultValue = "") String keySearch1,
@@ -32,6 +42,14 @@ public class DocumentRestController {
         return new ResponseEntity<>(documentDto, HttpStatus.OK);
     }
 
+
+    /**
+     * Create by: TuanNDN
+     * Date created: 29/03/2023
+     * Function: delete DocumentDto by id
+     * @param id
+     * @return HttpStatus.BAD_REQUEST if result is error or HttpStatus. OK if result is not error
+     */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Document> deleteDocument(@PathVariable("id") Long id) {
         if (id == null) {
@@ -41,23 +59,39 @@ public class DocumentRestController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+
+    /**
+     * Create by: TuanNDN
+     * Date created: 29/03/2023
+     * Function: find by id
+     * @param id
+     * @return HttpStatus.BAD_REQUEST if result is error or HttpStatus. OK if result is not error
+     */
     @GetMapping("/info/{id}")
     public ResponseEntity<Document> GetDocumentFindById(@PathVariable Long id) {
-        Document document = documentService.getDocumentFindById(id);
-        if (document == null) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        IDocumentDto documentDto = documentService.getDocumentFindById(id);
+        if (documentDto == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(document, HttpStatus.OK);
+        return new ResponseEntity(documentDto, HttpStatus.OK);
     }
 
+    /**
+     * Create by: TuanNDN
+     * Date created: 29/03/2023
+     * Function: create Document
+     * @param 'documentDescribe'
+     * @param 'documentFile'
+     * @param 'documentName'
+     * @return HttpStatus.BAD_REQUEST if result is error or HttpStatus. OK if result is not error
+     */
     @PostMapping("/create-document")
-    public ResponseEntity createDocument(@RequestBody DocumentDto documentDto) {
+    public ResponseEntity createDocument(@RequestBody @Valid  DocumentDto documentDto) {
         if (documentDto == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         documentService.addDocument(documentDto.getDocumentDescribe(),documentDto.getDocumentFile(),documentDto.getDocumentName());
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
 
 
