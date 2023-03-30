@@ -159,6 +159,12 @@ public class TeacherDTO {
     public void checkValidateCreateTeacher(List<IEmailAndPhoneNumberDTO> list, TeacherDTO teacherDTO, Errors errors) {
         if (teacherDTO.getTeacherName().matches("")) {
             errors.rejectValue("teacherName", "teacherName", "Tên giáo viên không được để trống");
+        } else {
+            int minLength = teacherDTO.getTeacherName().length();
+            int maxLength = teacherDTO.getTeacherName().length();
+            if (minLength <= 1 || maxLength >= 50) {
+                errors.rejectValue("teacherName", "teacherName", "Tên giáo viên phải nằm trong khoảng 1->50 kí tự");
+            }
         }
 
         if (teacherDTO.getDateOfBirth().matches("")) {
@@ -175,9 +181,11 @@ public class TeacherDTO {
 
         if (teacherDTO.getPhoneNumber().matches("")) {
             errors.rejectValue("phoneNumber", "phoneNumber", "Số điện thoại không được để trống");
+        } else if (!teacherDTO.getPhoneNumber().matches("[0][1-9]{9}")) {
+            errors.rejectValue("phoneNumber", "phoneNumber", "Số điện thoại bắt đầu bằng 0 và phải có 10 số");
         } else {
             for (int i = 0; i < list.size(); i++) {
-                if (teacherDTO.getPhoneNumber().equals(list.get(i).getPhoneNumber())){
+                if (teacherDTO.getPhoneNumber().equals(list.get(i).getPhoneNumber())) {
                     errors.rejectValue("phoneNumber", "phoneNumber", "Số điện thoại đã được sử dụng");
                     break;
                 }
@@ -188,11 +196,11 @@ public class TeacherDTO {
             errors.rejectValue("faculty", "faculty", "Học vị không được để trống");
         }
 
-        if (teacherDTO.getEmail().matches("")){
+        if (teacherDTO.getEmail().matches("")) {
             errors.rejectValue("email", "email", "Email không được để trống");
         } else {
             for (int i = 0; i < list.size(); i++) {
-                if(teacherDTO.getEmail().equals(list.get(i).getEmail())){
+                if (teacherDTO.getEmail().equals(list.get(i).getEmail())) {
                     errors.rejectValue("email", "email", "Email đã được sử dụng");
                     break;
                 }
@@ -222,7 +230,7 @@ public class TeacherDTO {
         } else {
             for (int i = 0; i < list.size(); i++) {
                 int count = 0;
-                if (teacherDTO.getPhoneNumber().equals(list.get(i).getPhoneNumber()) && count==2){
+                if (teacherDTO.getPhoneNumber().equals(list.get(i).getPhoneNumber()) && count == 2) {
                     errors.rejectValue("phoneNumber", "phoneNumber", "Số điện thoại đã được sử dụng");
                     count++;
                     break;
@@ -234,12 +242,12 @@ public class TeacherDTO {
             errors.rejectValue("faculty", "faculty", "Học vị không được để trống");
         }
 
-        if (teacherDTO.getEmail().matches("")){
+        if (teacherDTO.getEmail().matches("")) {
             errors.rejectValue("email", "email", "Email không được để trống");
         } else {
             int count = 0;
             for (int i = 0; i < list.size(); i++) {
-                if(teacherDTO.getEmail().equals(list.get(i).getEmail()) && count==2){
+                if (teacherDTO.getEmail().equals(list.get(i).getEmail()) && count == 2) {
                     errors.rejectValue("email", "email", "Email đã được sử dụng");
                     count++;
                     break;

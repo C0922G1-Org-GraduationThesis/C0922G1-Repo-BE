@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -60,7 +61,6 @@ public class TeacherRestController {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity(listDegree, HttpStatus.OK);
-
     }
 
     @GetMapping("allPhoneNumberAndEmail")
@@ -84,10 +84,9 @@ public class TeacherRestController {
     @PostMapping("/createTeacher")
     public ResponseEntity createTeacher(@Validated @RequestBody TeacherDTO teacherDTO, BindingResult bindingResult) {
         teacherDTO.checkValidateCreateTeacher(iTeacherService.getAllPhoneNumberAndEmail(),
-                teacherDTO,bindingResult);
-        if(bindingResult.hasErrors()){
+                teacherDTO, bindingResult);
+        if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
         }
         String teacherCode = "GV-" + (iTeacherService.maxIdTeacher().getTeacherId() + 1);
         iTeacherService.addTeacher(teacherDTO.getTeacherName(), teacherDTO.getDateOfBirth(), teacherDTO.getDegree().getDegreeId(), teacherDTO.getTeacherAddress(), teacherDTO.isTeacherGender(), teacherDTO.getPhoneNumber(), teacherDTO.getFaculty().getFacultyId(), teacherDTO.getEmail(), teacherCode, teacherDTO.getImg());
@@ -107,6 +106,9 @@ public class TeacherRestController {
     public ResponseEntity getTeacher(@PathVariable("id") Long id) {
         Teacher teacher = new Teacher();
         TeacherFindById teacherFindById = iTeacherService.getTeacher(id);
+        if (teacherFindById == null) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         teacher.setTeacherId(teacherFindById.getTeacherId());
         teacher.setImg(teacherFindById.getImg());
         teacher.setTeacherName(teacherFindById.getTeacherName());
@@ -122,9 +124,10 @@ public class TeacherRestController {
         teacher.setFaculty(new Faculty(teacherFindById.getFacultyId(), teacherFindById.getFacultyName()));
         teacher.setEmail(teacherFindById.getEmail());
 
-        if (teacher == null) {
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        if (teacher.getTeacherId() == null) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
+
         return new ResponseEntity(teacher, HttpStatus.OK);
     }
 
@@ -136,13 +139,13 @@ public class TeacherRestController {
      * @param id
      * @return HttpStatus.OK when the data is saved to the database, HttpStatus.BAD_REQUEST when an error occurs
      */
-    @PatchMapping("/updateTeacher/{id}")
+    @PutMapping("/updateTeacher/{id}")
     public ResponseEntity updateTeacher(@PathVariable("id") Long id, @Validated @RequestBody TeacherDTO teacherDTO, BindingResult bindingResult) {
         teacherDTO.checkValidateUpdateTeacher(iTeacherService.getAllPhoneNumberAndEmail(), teacherDTO, bindingResult);
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-        iTeacherService.updateTeacher(teacherDTO.getTeacherName(), teacherDTO.getDateOfBirth(), teacherDTO.getDegree().getDegreeId(), teacherDTO.getTeacherAddress(), teacherDTO.isTeacherGender(), teacherDTO.getPhoneNumber(), teacherDTO.getFaculty().getFacultyId(), teacherDTO.getEmail(), teacherDTO.getImg(), id);
-        return new ResponseEntity(HttpStatus.OK);
+        iTeacherService.updateTeacher(teacherDTO.getTeacherName(), teacherDTO.getDateOfBirth(), teacherDTO.getDegree().getDegreeId(), teacherDTO.getTeacherAddress(), teacherDTO.isTeacherGender(), teacherDTO.getPhoneNumber(), teacherDTO.getFaculty().getFacultyId(), teacherDTO.getEmail(), teacherDTO.getImg(),id);
+        return new ResponseEntity(teacherDTO,HttpStatus.OK);
     }
 }
