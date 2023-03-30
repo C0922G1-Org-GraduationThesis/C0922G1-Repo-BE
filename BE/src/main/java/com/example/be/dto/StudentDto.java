@@ -1,54 +1,50 @@
-package com.example.be.model;
+package com.example.be.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.be.model.Clazz;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.validation.constraints.*;
 
-@Entity
-public class Student {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "student_id")
+
+public class StudentDto implements Validator {
+
     private Long studentId;
-    @Column(columnDefinition = "varchar(50)", nullable = false)
-    private String studentName;
-    @Column(columnDefinition = "varchar(50)", nullable = false, unique = true)
-    private String studentCode;
-    @Column(columnDefinition = "varchar(50)", nullable = false)
-    private String dateOfBirth;
-    @Column(columnDefinition = "varchar(50)", nullable = false, unique = true)
-    private String email;
-    @Column(columnDefinition = "varchar(50)", nullable = false, unique = true)
-    private String phoneNumber;
-    @Column(columnDefinition = "bit(1)", nullable = false)
-    private boolean studentGender;
-    @Column(columnDefinition = "varchar(50)", nullable = false)
-    private String studentAddress;
-    @Column(columnDefinition = "text", nullable = false)
-    private String img;
-    @Column(columnDefinition = "bit(1)")
-    private boolean flagDelete;
-//    @OneToOne
-//    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
-//    private Account account;
-    @ManyToOne
-    @JoinColumn(name = "clazz_id", referencedColumnName = "clazz_id")
-    private Clazz   clazz;
-//    @ManyToOne
-//    @JoinColumn(name = "team_id", referencedColumnName = "team_id")
-//    private Team team;
-    @OneToMany(mappedBy = "student")
-    @JsonIgnore
-    private Set<StudentAnnouncement> studentAnnouncementSet;
-    @OneToMany(mappedBy = "student")
-    @JsonIgnore
-    private Set<QuestionAndAnswer> questionAndAnswerSet;
 
-    public Student() {
+    @NotBlank(message = "không được để trống")
+//    @Max(value = 50,message = "Tên không được vượt quá 50 ký tự")
+    private String studentName;
+
+    @NotBlank(message ="không được để trống" )
+    private String studentCode;
+
+    @NotBlank(message = "không được để trống")
+//    @Pattern(regexp = "^(0[1-9]|[12][0-9]|3[01])\\/(0[1-9]|1[012])\\/\\d{2}$\n",message = "Ngày sinh phải theo thứ tự DD/MM/YY")
+    private String dateOfBirth;
+
+    @NotNull(message = "không được để trống")
+    @Email(message = "Email không hợp lệ")
+    private String email;
+
+    @NotBlank(message = "không được để trống")
+//    @Pattern(regexp = "^[0-9]+$ \n")
+    private String phoneNumber;
+
+    private boolean studentGender;
+
+    private String studentAddress;
+
+    private String img;
+
+    private boolean flagDelete;
+
+    private Clazz clazz;
+
+    public StudentDto() {
     }
 
-    public Student(Long studentId, String studentName, String studentCode, String dateOfBirth, String email, String phoneNumber, boolean studentGender, String studentAddress, String img, boolean flagDelete, Clazz clazz, Set<StudentAnnouncement> studentAnnouncementSet, Set<QuestionAndAnswer> questionAndAnswerSet) {
+    public StudentDto(Long studentId, String studentName, String studentCode, String dateOfBirth, String email, String phoneNumber, boolean studentGender, String studentAddress, String img, boolean flagDelete, Clazz clazz) {
         this.studentId = studentId;
         this.studentName = studentName;
         this.studentCode = studentCode;
@@ -60,8 +56,6 @@ public class Student {
         this.img = img;
         this.flagDelete = flagDelete;
         this.clazz = clazz;
-        this.studentAnnouncementSet = studentAnnouncementSet;
-        this.questionAndAnswerSet = questionAndAnswerSet;
     }
 
     public Long getStudentId() {
@@ -152,19 +146,13 @@ public class Student {
         this.clazz = clazz;
     }
 
-    public Set<StudentAnnouncement> getStudentAnnouncementSet() {
-        return studentAnnouncementSet;
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
     }
 
-    public void setStudentAnnouncementSet(Set<StudentAnnouncement> studentAnnouncementSet) {
-        this.studentAnnouncementSet = studentAnnouncementSet;
-    }
+    @Override
+    public void validate(Object target, Errors errors) {
 
-    public Set<QuestionAndAnswer> getQuestionAndAnswerSet() {
-        return questionAndAnswerSet;
-    }
-
-    public void setQuestionAndAnswerSet(Set<QuestionAndAnswer> questionAndAnswerSet) {
-        this.questionAndAnswerSet = questionAndAnswerSet;
     }
 }
