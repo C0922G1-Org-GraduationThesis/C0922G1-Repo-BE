@@ -193,4 +193,19 @@ public class StudentController_getStudentListIdTeacher {
                 .andExpect(jsonPath("content[1].nameTeacher").value("Lê Thị Thu Minh"));
     }
 
+    /**
+     * This function use to test the instructor's student list of teacherId="3" but student.flag_delete= true, page = 0
+     *
+     * @Author: VinhLD
+     * @Date: 30/3/2023
+     */
+    @Test
+    public void getStudentListIdTeacher_4() throws Exception {
+        this.mockMvc.perform(
+                        MockMvcRequestBuilders.get("/students/list-id-teacher/3?nameSearch=&page=0"))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+
 }
