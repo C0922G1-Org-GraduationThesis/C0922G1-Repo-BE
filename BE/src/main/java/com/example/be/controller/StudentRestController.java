@@ -34,7 +34,13 @@ public class StudentRestController {
         return new ResponseEntity<>( student,HttpStatus.OK);
     }
 
-
+    /**
+     * Created by: MinhLD
+     * Date create: 29/03/2023
+     * Function: tìm kiếm bằng id
+     * @param :studentId
+     * @return HttpStatus.NOT_FOUND if result is empty or HttpStatus.OK if result is not error.
+     */
     @GetMapping("/{studentId}")
     public ResponseEntity<Student> findById(@PathVariable long studentId){
         Student student = studentService.findStudentById(studentId);
@@ -44,7 +50,13 @@ public class StudentRestController {
             return new ResponseEntity<>(student,HttpStatus.OK);
         }
     }
-
+    /**
+     * Created by: MinhLD
+     * Date create: 29/03/2023
+     * Function: chỉnh sửa sinh viên
+     * @param :student,studentId
+     * @return HttpStatus.NOT_FOUND if result is empty or HttpStatus.OK if result is not error.
+     */
     @PatchMapping("/{studentId}")
     public ResponseEntity<Student> updateStudent(@RequestBody Student student, @PathVariable long studentId, BindingResult bindingResult) {
         Student student1 = studentService.findStudentById(studentId);
