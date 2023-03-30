@@ -8,7 +8,7 @@ public interface TeacherFindById {
     int getDegreeId();
     String getDegreeName();
     String getTeacherAddress();
-    String getTeacherGender();
+    boolean getTeacherGender();
     String getPhoneNumber();
     int getFacultyId();
     String getFacultyName();

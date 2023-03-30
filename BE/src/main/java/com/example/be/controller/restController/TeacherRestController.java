@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -115,7 +116,7 @@ public class TeacherRestController {
         teacher.setDateOfBirth(teacherFindById.getDateOfBirth());
         teacher.setDegree(new Degree(teacherFindById.getDegreeId(), teacherFindById.getDegreeName()));
         teacher.setTeacherAddress(teacherFindById.getTeacherAddress());
-        if (teacherFindById.getTeacherGender().equals("1")) {
+        if (teacherFindById.getTeacherGender()) {
             teacher.setTeacherGender(true);
         } else {
             teacher.setTeacherGender(false);
@@ -143,7 +144,9 @@ public class TeacherRestController {
     public ResponseEntity updateTeacher(@PathVariable("id") Long id, @Validated @RequestBody TeacherDTO teacherDTO, BindingResult bindingResult) {
         teacherDTO.checkValidateUpdateTeacher(iTeacherService.getAllPhoneNumberAndEmail(), teacherDTO, bindingResult);
         if (bindingResult.hasErrors()) {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(
+//                    bindingResult.getFieldError(),
+                    HttpStatus.BAD_REQUEST);
         }
         iTeacherService.updateTeacher(teacherDTO.getTeacherName(), teacherDTO.getDateOfBirth(), teacherDTO.getDegree().getDegreeId(), teacherDTO.getTeacherAddress(), teacherDTO.isTeacherGender(), teacherDTO.getPhoneNumber(), teacherDTO.getFaculty().getFacultyId(), teacherDTO.getEmail(), teacherDTO.getImg(),id);
         return new ResponseEntity(teacherDTO,HttpStatus.OK);

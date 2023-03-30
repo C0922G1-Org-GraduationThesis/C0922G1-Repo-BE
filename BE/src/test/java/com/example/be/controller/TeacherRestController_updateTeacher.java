@@ -140,7 +140,7 @@ public class TeacherRestController_updateTeacher {
         try {
             this.mockMvc
                     .perform(MockMvcRequestBuilders
-                            .post("/api-teacher/createTeacher")
+                            .put("/api-teacher/createTeacher")
                             .content(this.objectMapper.writeValueAsString(teacherDTO))
                             .contentType(MediaType.APPLICATION_JSON_VALUE))
                     .andDo(print())
