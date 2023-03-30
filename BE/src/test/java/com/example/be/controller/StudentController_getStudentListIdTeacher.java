@@ -28,7 +28,7 @@ public class StudentController_getStudentListIdTeacher {
     @Test
     public void getStudentListIdTeacher_1() throws Exception {
         this.mockMvc.perform(
-                        MockMvcRequestBuilders.get("/student/list-id-teacher/null"))
+                        MockMvcRequestBuilders.get("/students/list-id-teacher/null"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
@@ -43,7 +43,7 @@ public class StudentController_getStudentListIdTeacher {
     @Test
     public void getStudentListIdTeacher_2() throws Exception {
         this.mockMvc.perform(
-                        MockMvcRequestBuilders.get("/student/list-id-teacher/"))
+                        MockMvcRequestBuilders.get("/students/list-id-teacher/"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
@@ -57,7 +57,7 @@ public class StudentController_getStudentListIdTeacher {
     @Test
     public void getStudentListIdTeacher_3() throws Exception {
         this.mockMvc.perform(
-                        MockMvcRequestBuilders.get("/student/list-id-teacher/287263"))
+                        MockMvcRequestBuilders.get("/students/list-id-teacher/287263"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
@@ -72,7 +72,7 @@ public class StudentController_getStudentListIdTeacher {
     @Test
     public void getStudentListIdTeacher_4_7() throws Exception {
         this.mockMvc.perform(
-                        MockMvcRequestBuilders.get("http://localhost:8080/students/list-id-teacher/1?nameSearch=null&page=0"))
+                        MockMvcRequestBuilders.get("/students/list-id-teacher/1?nameSearch=null&page=0"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
@@ -88,7 +88,7 @@ public class StudentController_getStudentListIdTeacher {
     @Test
     public void getStudentListIdTeacher_4_8() throws Exception {
         this.mockMvc.perform(
-                        MockMvcRequestBuilders.get("http://localhost:8080/students/list-id-teacher/1?nameSearch=&page=0"))
+                        MockMvcRequestBuilders.get("/students/list-id-teacher/1?nameSearch=&page=0"))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("totalPages").value(2))
@@ -122,7 +122,7 @@ public class StudentController_getStudentListIdTeacher {
     @Test
     public void getStudentListIdTeacher_4_9() throws Exception {
         this.mockMvc.perform(
-                        MockMvcRequestBuilders.get("http://localhost:8080/students/list-id-teacher/1?nameSearch=abcdef&page=0"))
+                        MockMvcRequestBuilders.get("/students/list-id-teacher/1?nameSearch=abcdef&page=0"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
@@ -138,7 +138,7 @@ public class StudentController_getStudentListIdTeacher {
     @Test
     public void getStudentListIdTeacher_4_9_1() throws Exception {
         this.mockMvc.perform(
-                        MockMvcRequestBuilders.get("http://localhost:8080/students/list-id-teacher/1?nameSearch=@@@@@@@&page=0"))
+                        MockMvcRequestBuilders.get("/students/list-id-teacher/1?nameSearch=@@@@@@@&page=0"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
@@ -154,7 +154,7 @@ public class StudentController_getStudentListIdTeacher {
     @Test
     public void getStudentListIdTeacher_4_10() throws Exception {
         this.mockMvc.perform(
-                        MockMvcRequestBuilders.get("http://localhost:8080/students/list-id-teacher/3?nameSearch=Nguyễn Mai Anh&page=0"))
+                        MockMvcRequestBuilders.get("/students/list-id-teacher/3?nameSearch=Nguyễn Mai Anh&page=0"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
@@ -170,7 +170,7 @@ public class StudentController_getStudentListIdTeacher {
     @Test
     public void getStudentListIdTeacher_4_11() throws Exception {
         this.mockMvc.perform(
-                        MockMvcRequestBuilders.get("http://localhost:8080/students/list-id-teacher/1?nameSearch=Lan&page=0"))
+                        MockMvcRequestBuilders.get("/students/list-id-teacher/1?nameSearch=Lan&page=0"))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("totalPages").value(1))
