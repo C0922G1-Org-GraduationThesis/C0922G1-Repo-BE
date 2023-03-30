@@ -18,6 +18,16 @@ public class StudentController {
     @Autowired
     private IStudentService studentService;
 
+
+    /**
+     * Create by : VinhLD
+     * Date create : 29/3/2023
+     * Function: show list student
+     * @param nameSearch
+     * @param pageable
+     * @return HttpStatus.OK if connect to database return json list student or HttpStatus.N0_CONTENT if list student is empty
+     */
+
     @GetMapping("")
     public ResponseEntity<Page<StudentDto>> getAllStudent(@RequestParam(value = "nameSearch",defaultValue = "") String nameSearch,
                                                           @PageableDefault(size = 5) Pageable pageable) {
@@ -28,6 +38,17 @@ public class StudentController {
         return  new ResponseEntity<>(studentDtos, HttpStatus.OK);
 
     }
+
+
+    /**
+     * Create by : Vinh LD
+     * Date create: 29/3/2023
+     * Function: show the instructor's list of students
+     * @param nameSearch
+     * @param pageable
+     * @param teacherId
+     * @return HttpStatus.OK if connect to database return json the instructor's list of students or HttpStatus.N0_CONTENT if the instructor's list of students is empty
+     */
 
     @GetMapping("/list-id-teacher/{teacherId}")
     public ResponseEntity<Page<StudentInfo>>getStudentListIdTeacher(@RequestParam(value = "nameSearch",defaultValue = "") String nameSearch,

@@ -14,12 +14,31 @@ public class StudentService implements IStudentService {
 
     @Autowired
     private IStudentRepository studentRepository;
+    /**
+     * Create by : VinhLD
+     * Date create 29/03/2023
+     * Function: show list student
+     *
+     * @param pageable
+     * @param nameSearch
+     * @return json list student
+     */
 
     @Override
     public Page<StudentDto> getStudentList(Pageable pageable, String nameSearch) {
         return studentRepository.getStudentList(pageable, nameSearch);
     }
 
+    /**
+     * Create by : VinhLD
+     * Date create 29/03/2023
+     * Function: show the instructor's list of students
+     *
+     * @param pageable
+     * @param nameSearch
+     * @param idTeacher
+     * @return json the instructor's list of students
+     */
     @Override
     public Page<StudentInfo> findAllStudent(Pageable pageable, String nameSearch, Long idTeacher) {
         return studentRepository.findAllStudent(pageable,nameSearch,idTeacher);
