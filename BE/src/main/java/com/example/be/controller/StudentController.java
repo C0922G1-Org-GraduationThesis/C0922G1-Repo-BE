@@ -25,7 +25,7 @@ public class StudentController {
      * Function: show list student
      * @param nameSearch
      * @param pageable
-     * @return HttpStatus.OK if connect to database return json list student or HttpStatus.N0_CONTENT if list student is empty
+     * @return HttpStatus.OK if connect to database return json list student or HttpStatus.NOT_FOUND if list student is empty
      */
 
     @GetMapping("")
@@ -33,7 +33,7 @@ public class StudentController {
                                                           @PageableDefault(size = 5) Pageable pageable) {
         Page<StudentDto> studentDtos = studentService.getStudentList(pageable, nameSearch);
         if (studentDtos.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return  new ResponseEntity<>(studentDtos, HttpStatus.OK);
 
@@ -47,7 +47,7 @@ public class StudentController {
      * @param nameSearch
      * @param pageable
      * @param teacherId
-     * @return HttpStatus.OK if connect to database return json the instructor's list of students or HttpStatus.N0_CONTENT if the instructor's list of students is empty
+     * @return HttpStatus.OK if connect to database return json the instructor's list of students or HttpStatus.NOT_FOUND if the instructor's list of students is empty
      */
 
     @GetMapping("/list-id-teacher/{teacherId}")
@@ -56,7 +56,7 @@ public class StudentController {
                                                                     @PathVariable Long teacherId){
         Page<StudentInfo> studentInfos= studentService.findAllStudent(pageable,nameSearch,teacherId);
         if (studentInfos.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(studentInfos,HttpStatus.OK);
     }
